@@ -16,8 +16,9 @@ db.init_db()
 api_key = os.getenv('OPENAI_API_KEY')
 if not api_key:
     print("WARNING: OPENAI_API_KEY not found in environment variables!")
-
-client = OpenAI()
+    client = None
+else:
+    client = OpenAI(api_key=api_key)
 
 # ============== Chatbot Configurations ==============
 
@@ -121,11 +122,11 @@ def chat():
         }), 400
     
     # Check if API key is configured
-    if not os.getenv('OPENAI_API_KEY'):
+    if not os.getenv('OPENAI_API_KEY') or client is None:
         return jsonify({
             'error': 'API key not configured',
             'error_type': 'config_error',
-            'details': 'OpenAI API key is missing. Please add OPENAI_API_KEY to your .env file.'
+            'details': 'OpenAI API key is missing. Please add OPENAI_API_KEY environment variable.'
         }), 500
     
     # Add user message to database
