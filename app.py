@@ -12,13 +12,17 @@ app = Flask(__name__)
 # Initialize database
 db.init_db()
 
-# Check if API key is configured
-api_key = os.getenv('OPENAI_API_KEY')
-if not api_key:
-    print("WARNING: OPENAI_API_KEY not found in environment variables!")
-    client = None
-else:
-    client = OpenAI(api_key=api_key)
+# Lazy OpenAI client initialization
+_client = None
+
+def get_openai_client():
+    """Get or create OpenAI client."""
+    global _client
+    if _client is None:
+        api_key = os.getenv('OPENAI_API_KEY')
+        if api_key:
+            _client = OpenAI(api_key=api_key)
+    return _client
 
 # ============== Chatbot Configurations ==============
 
@@ -122,7 +126,8 @@ def chat():
         }), 400
     
     # Check if API key is configured
-    if not os.getenv('OPENAI_API_KEY') or client is None:
+    client = get_openai_client()
+    if client is None:
         return jsonify({
             'error': 'API key not configured',
             'error_type': 'config_error',
