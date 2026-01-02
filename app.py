@@ -52,7 +52,7 @@ CHATBOTS = {
         'short_name': 'Asistan',
         'icon': '🤖',
         'prompt_id': 'pmpt_6957fe7589408195b68e4afa711750cb0976d4371a952f32',
-        'prompt_version': '3',
+        'prompt_version': '4',
         'accent_color': '#6366f1',  # Purple/Indigo
         'welcome_title': 'Merhaba Cihan! 👋',
         'welcome_text': 'Bugün sana nasıl yardımcı olabilirim? İstediğin her konuda yanındayım.',
