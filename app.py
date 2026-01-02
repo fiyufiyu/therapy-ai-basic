@@ -20,9 +20,21 @@ def get_openai_client():
     global _client
     if _client is None:
         api_key = os.getenv('OPENAI_API_KEY')
+        print(f"DEBUG: API key exists: {bool(api_key)}, length: {len(api_key) if api_key else 0}")
         if api_key:
             _client = OpenAI(api_key=api_key)
     return _client
+
+@app.route('/api/debug')
+def debug_env():
+    """Debug endpoint to check environment variables."""
+    api_key = os.getenv('OPENAI_API_KEY')
+    return jsonify({
+        'api_key_exists': bool(api_key),
+        'api_key_length': len(api_key) if api_key else 0,
+        'api_key_prefix': api_key[:10] + '...' if api_key and len(api_key) > 10 else None,
+        'env_vars': list(os.environ.keys())
+    })
 
 # ============== Chatbot Configurations ==============
 
