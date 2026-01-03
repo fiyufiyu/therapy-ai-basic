@@ -490,7 +490,14 @@
             flex-shrink: 0;
         }
 
+        .input-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
         .input-container {
+            flex: 1;
             display: flex;
             align-items: flex-end;
             gap: 10px;
@@ -927,6 +934,279 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
+
+        /* Actions Drop-up Menu */
+        .actions-dropup {
+            position: relative;
+            display: none;
+        }
+
+        .actions-dropup.visible {
+            display: block;
+        }
+
+        .actions-trigger {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .actions-trigger:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border-color: var(--accent);
+        }
+
+        .actions-trigger.active {
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .actions-trigger svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.2s ease;
+        }
+
+        .actions-trigger.active svg {
+            transform: rotate(180deg);
+        }
+
+        .actions-menu {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 0;
+            min-width: 220px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.2s ease;
+            z-index: 50;
+            overflow: hidden;
+        }
+
+        .actions-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .actions-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px 14px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            color: var(--text-primary);
+            transition: all 0.15s ease;
+            text-align: left;
+        }
+
+        .actions-menu-item:hover {
+            background: var(--bg-secondary);
+        }
+
+        .actions-menu-item:active {
+            background: var(--accent-soft);
+        }
+
+        .actions-menu-item svg {
+            width: 18px;
+            height: 18px;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .actions-menu-item:hover svg {
+            color: var(--accent);
+        }
+
+        .actions-menu-item span {
+            flex: 1;
+        }
+
+        .actions-menu-divider {
+            height: 1px;
+            background: var(--border-soft);
+            margin: 4px 0;
+        }
+
+        /* Summary specific item style */
+        .actions-menu-item.summary-item {
+            color: var(--accent);
+        }
+
+        .actions-menu-item.summary-item svg {
+            color: var(--accent);
+        }
+
+        /* Summary Modal */
+        .summary-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .summary-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .summary-modal {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .summary-modal-overlay.show .summary-modal {
+            transform: scale(1);
+        }
+
+        .summary-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .summary-modal-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .summary-modal-title svg {
+            width: 24px;
+            height: 24px;
+            color: var(--accent);
+        }
+
+        .summary-modal-close {
+            background: var(--bg-secondary);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 8px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .summary-modal-close:hover {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        .summary-modal-close svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .summary-content {
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+
+        .summary-content p {
+            margin-bottom: 16px;
+        }
+
+        .summary-content strong {
+            color: var(--accent);
+        }
+
+        .summary-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+        }
+
+        .summary-loading .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .summary-error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: var(--radius-md);
+            padding: 16px;
+            color: #991b1b;
+            text-align: center;
+        }
+
+        .summary-modal-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .summary-modal-btn {
+            padding: 10px 20px;
+            background: var(--accent);
+            border: none;
+            border-radius: var(--radius-full);
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .summary-modal-btn:hover {
+            filter: brightness(1.1);
+        }
     </style>
 </head>
 <body>
@@ -980,10 +1260,31 @@
 
                 <!-- Input Area -->
                 <div class="input-area">
-                    <div class="input-container">
+                    <div class="input-row">
+                        {% if bot.id == 'meliksah' %}
+                        <div class="actions-dropup" id="actionsDropup">
+                            <button class="actions-trigger" id="actionsTrigger" onclick="toggleActionsMenu()" title="Aksiyonlar">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 8v8M8 12h8"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                            </button>
+                            <div class="actions-menu" id="actionsMenu">
+                                <button class="actions-menu-item summary-item" onclick="handleSummarizeSession()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+                                        <rect x="9" y="3" width="6" height="4" rx="1"/>
+                                        <path d="M9 12h6M9 16h6"/>
+                                    </svg>
+                                    <span>Seansı Bitir ve Özetle</span>
+                                </button>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="input-container">
                             <textarea 
                                 id="userInput" 
-                    placeholder="{{ bot.input_placeholder }}" 
+                                placeholder="{{ bot.input_placeholder }}" 
                                 rows="1"
                                 onkeydown="handleKeyDown(event)"
                                 oninput="autoResize(this)"
@@ -994,9 +1295,10 @@
                                 </svg>
                             </button>
                         </div>
-            <div class="input-hint">{{ bot.input_hint }}</div>
                     </div>
+                    <div class="input-hint">{{ bot.input_hint }}</div>
                 </div>
+            </div>
 
     <!-- History Panel -->
     <div class="history-overlay" id="historyOverlay" onclick="closeHistory()">
@@ -1011,6 +1313,36 @@
             </div>
             <div class="history-content" id="historyContent">
                 <div class="history-empty">{{ bot.no_chats }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Modal -->
+    <div class="summary-modal-overlay" id="summaryModalOverlay" onclick="closeSummaryModal()">
+        <div class="summary-modal" onclick="event.stopPropagation()">
+            <div class="summary-modal-header">
+                <div class="summary-modal-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+                        <rect x="9" y="3" width="6" height="4" rx="1"/>
+                        <path d="M9 12h6M9 16h6"/>
+                    </svg>
+                    <span>Seans Özeti</span>
+                </div>
+                <button class="summary-modal-close" onclick="closeSummaryModal()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="summary-content" id="summaryContent">
+                <div class="summary-loading">
+                    <div class="spinner"></div>
+                    <span>Seans özetleniyor...</span>
+                </div>
+            </div>
+            <div class="summary-modal-actions">
+                <button class="summary-modal-btn" onclick="closeSummaryModal()">Tamam</button>
             </div>
         </div>
     </div>
@@ -1136,6 +1468,124 @@
             sendSuggestion(message);
         }
 
+        // Actions Dropup Functions
+        function updateActionsDropupVisibility() {
+            const actionsDropup = document.getElementById('actionsDropup');
+            if (!actionsDropup) return; // Not meliksah bot
+            
+            const messages = document.getElementById('messages');
+            const hasMessages = messages && messages.children.length > 0;
+            
+            if (hasMessages) {
+                actionsDropup.classList.add('visible');
+            } else {
+                actionsDropup.classList.remove('visible');
+                closeActionsMenu();
+            }
+        }
+
+        function toggleActionsMenu() {
+            const trigger = document.getElementById('actionsTrigger');
+            const menu = document.getElementById('actionsMenu');
+            
+            if (menu.classList.contains('show')) {
+                closeActionsMenu();
+            } else {
+                trigger.classList.add('active');
+                menu.classList.add('show');
+            }
+        }
+
+        function closeActionsMenu() {
+            const trigger = document.getElementById('actionsTrigger');
+            const menu = document.getElementById('actionsMenu');
+            
+            if (trigger) trigger.classList.remove('active');
+            if (menu) menu.classList.remove('show');
+        }
+
+        function handleSummarizeSession() {
+            closeActionsMenu();
+            openSummaryModal();
+        }
+
+        // Close dropup when clicking outside
+        document.addEventListener('click', function(e) {
+            const dropup = document.getElementById('actionsDropup');
+            if (dropup && !dropup.contains(e.target)) {
+                closeActionsMenu();
+            }
+        });
+
+        // Summary Modal Functions
+        async function openSummaryModal() {
+            document.getElementById('summaryModalOverlay').classList.add('show');
+            document.getElementById('summaryContent').innerHTML = `
+                <div class="summary-loading">
+                    <div class="spinner"></div>
+                    <span>Seans özetleniyor...</span>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch(`/api/conversations/${sessionId}/summarize`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ bot_id: BOT.id })
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    document.getElementById('summaryContent').innerHTML = `
+                        <div class="summary-error">
+                            <strong>⚠️ ${escapeHtml(data.error)}</strong><br>
+                            ${escapeHtml(data.details || 'Bir hata oluştu.')}
+                        </div>
+                    `;
+                } else {
+                    // Parse and display the summary with nice formatting
+                    const summaryHtml = parseSummaryMarkdown(data.summary);
+                    document.getElementById('summaryContent').innerHTML = summaryHtml;
+                    
+                    // Reload history to update the title
+                    loadHistory();
+                }
+            } catch (e) {
+                document.getElementById('summaryContent').innerHTML = `
+                    <div class="summary-error">
+                        <strong>⚠️ Bağlantı Hatası</strong><br>
+                        Sunucuya bağlanılamadı.
+                    </div>
+                `;
+            }
+        }
+
+        function parseSummaryMarkdown(text) {
+            if (!text) return '';
+            
+            let html = text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+            
+            // Convert markdown bold to HTML
+            html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            
+            // Add line breaks
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = html.replace(/\n/g, '<br>');
+            
+            // Wrap in paragraph
+            if (!html.startsWith('<')) html = '<p>' + html + '</p>';
+            
+            return html;
+        }
+
+        function closeSummaryModal() {
+            document.getElementById('summaryModalOverlay').classList.remove('show');
+        }
+
         // History Functions
         async function loadHistory() {
             try {
@@ -1227,6 +1677,7 @@
 
                 renderHistory();
                 closeHistory();
+                updateActionsDropupVisibility();
             } catch (e) {
                 console.error('Failed to load conversation:', e);
             }
@@ -1272,6 +1723,7 @@
 
             renderHistory();
             closeHistory();
+            updateActionsDropupVisibility();
         }
 
         function toggleHistory() {
@@ -1368,6 +1820,7 @@
             }
 
             addMessage(message, 'user');
+            updateActionsDropupVisibility();
             input.value = '';
             input.style.height = 'auto';
 
@@ -1396,6 +1849,7 @@
                 } else {
                     addMessage(data.response, 'assistant', data.response_time);
                     loadHistory();
+                    updateActionsDropupVisibility();
                 }
             } catch (e) {
                 stopTimer();

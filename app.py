@@ -414,6 +414,108 @@ def update_title(conversation_id):
         db.update_conversation_title(conversation_id, title)
     return jsonify({'status': 'updated'})
 
+# Session Summary Prompt
+SESSION_SUMMARY_PROMPT = """Sen bir terapi seansı özetleyicisisin. Aşağıdaki seans konuşmasını analiz et ve TAM OLARAK şu formatta yanıt ver:
+
+**📝 Özet:** [Seansın ana temasını ve kullanıcının durumunu özetleyen TEK bir cümle]
+
+**🎯 Aksiyon:** [Kullanıcının yapabileceği somut, küçük ve yapılabilir TEK bir adım]
+
+**💚 Kendine Not:** [Kendine şefkat veya gerçekçilik içeren, destekleyici TEK bir cümle]
+
+Kurallar:
+- Her bölüm MUTLAKA tek cümle olmalı
+- Özet cümlesi seans başlığı olarak da kullanılacak, bu yüzden kısa ve öz olsun (max 50 karakter)
+- Aksiyon somut ve hemen uygulanabilir olmalı
+- Kendine not kısmı sıcak ve destekleyici olmalı
+- Türkçe yaz"""
+
+@app.route('/api/conversations/<conversation_id>/summarize', methods=['POST'])
+def summarize_session(conversation_id):
+    """Generate a session summary for a conversation."""
+    bot_id = request.json.get('bot_id', 'meliksah') if request.json else 'meliksah'
+    
+    # Only allow for meliksah for now
+    if bot_id != 'meliksah':
+        return jsonify({
+            'error': 'Feature not available',
+            'error_type': 'feature_error',
+            'details': 'Bu özellik şu an sadece belirli kullanıcılar için aktif.'
+        }), 403
+    
+    # Get conversation messages
+    messages = db.get_messages(conversation_id)
+    if not messages:
+        return jsonify({
+            'error': 'No messages',
+            'error_type': 'validation_error',
+            'details': 'Özetlenecek mesaj bulunamadı.'
+        }), 400
+    
+    # Check if API key is configured
+    client = get_openai_client()
+    if client is None:
+        return jsonify({
+            'error': 'API key not configured',
+            'error_type': 'config_error',
+            'details': 'OpenAI API key is missing.'
+        }), 500
+    
+    # Build conversation text for summary
+    conversation_text = "\n".join([
+        f"{'Kullanıcı' if m['role'] == 'user' else 'Asistan'}: {m['content']}"
+        for m in messages
+    ])
+    
+    try:
+        # Call OpenAI API for summary
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": SESSION_SUMMARY_PROMPT},
+                {"role": "user", "content": f"Şu seansı özetle:\n\n{conversation_text}"}
+            ],
+            max_tokens=500,
+            temperature=0.7
+        )
+        
+        summary_text = response.choices[0].message.content
+        
+        # Extract the summary line for title (first line after "📝 Özet:")
+        title_match = summary_text.split("**📝 Özet:**")
+        if len(title_match) > 1:
+            # Get the text after "Özet:" until the next section or newline
+            title_part = title_match[1].split("**🎯")[0].strip()
+            # Clean up and limit length
+            new_title = title_part.replace("\n", " ").strip()[:60]
+            if new_title:
+                db.update_conversation_title(conversation_id, new_title)
+        
+        return jsonify({
+            'summary': summary_text,
+            'conversation_id': conversation_id
+        })
+        
+    except AuthenticationError as e:
+        return jsonify({
+            'error': 'Authentication failed',
+            'error_type': 'auth_error',
+            'details': 'API key geçersiz.'
+        }), 401
+    except RateLimitError as e:
+        return jsonify({
+            'error': 'Rate limit',
+            'error_type': 'rate_limit_error',
+            'details': 'Çok fazla istek. Lütfen biraz bekleyin.'
+        }), 429
+    except Exception as e:
+        print(f"Summary Error: {e}")
+        return jsonify({
+            'error': 'Summary failed',
+            'error_type': 'api_error',
+            'details': f'Özet oluşturulamadı: {str(e)}'
+        }), 500
+
 @app.route('/api/clear', methods=['POST'])
 def clear_conversation():
     """Clear messages from a conversation (legacy endpoint)."""
