@@ -45,7 +45,7 @@ CHATBOTS = {
         'short_name': 'Asistan',
         'icon': '🧠',
         'prompt_id': 'pmpt_6957e6ae66088195af2b5053af22c7ae0f5f0db59da0747b',
-        'prompt_version': '18',
+        'prompt_version': '20',
         'accent_color': '#10a37f',  # Green
         'welcome_title': 'Merhaba Meliksah! 👋',
         'welcome_text': 'Bugün sana nasıl yardımcı olabilirim? Aklındaki her şeyi benimle paylaşabilirsin.',
@@ -84,6 +84,29 @@ CHATBOTS = {
         'previous': 'Önceki',
         'no_chats': 'Henüz sohbet yok',
         'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
+    },
+    'melike': {
+        'id': 'melike',
+        'name': 'Melike için Asistan',
+        'short_name': 'Asistan',
+        'icon': '💜',
+        'prompt_id': 'pmpt_69580dccde088194aab560e77f08932c0e3a18c90eedd3b9',
+        'prompt_version': '3',
+        'accent_color': '#ec4899',  # Pink
+        'welcome_title': 'Merhaba Melike! 👋',
+        'welcome_text': 'Bugün sana nasıl yardımcı olabilirim? İstediğin her konuda yanındayım.',
+        'suggestions': [
+            'Bugün nasıl hissediyorum anlatayım',
+            'Bir konuda tavsiye almak istiyorum',
+            'Sadece sohbet edelim'
+        ],
+        'input_placeholder': 'Mesajını yaz...',
+        'new_chat': 'Yeni Sohbet',
+        'today': 'Bugün',
+        'yesterday': 'Dün',
+        'previous': 'Önceki',
+        'no_chats': 'Henüz sohbet yok',
+        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
     }
 }
 
@@ -103,6 +126,11 @@ def meliksah_chat():
 def cihan_chat():
     """Cihan-AI chat page."""
     return render_template('chat.html', bot=CHATBOTS['cihan'])
+
+@app.route('/melike')
+def melike_chat():
+    """Melike-AI chat page."""
+    return render_template('chat.html', bot=CHATBOTS['melike'])
 
 # ============== Chat API ==============
 
