@@ -130,6 +130,29 @@ CHATBOTS = {
         'previous': 'Önceki',
         'no_chats': 'Henüz sohbet yok',
         'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
+    },
+    'can': {
+        'id': 'can',
+        'name': 'Can için Asistan',
+        'short_name': 'Asistan',
+        'icon': '🔵',
+        'prompt_id': 'pmpt_69596825aeec819093917a7d6078509801eec0b63cd76647',
+        'prompt_version': '2',
+        'accent_color': '#3b82f6',  # Blue
+        'welcome_title': 'Merhaba Can! 👋',
+        'welcome_text': 'Bugün sana nasıl yardımcı olabilirim? İstediğin her konuda yanındayım.',
+        'suggestions': [
+            'Bugün nasıl hissediyorum anlatayım',
+            'Bir konuda tavsiye almak istiyorum',
+            'Sadece sohbet edelim'
+        ],
+        'input_placeholder': 'Mesajını yaz...',
+        'new_chat': 'Yeni Sohbet',
+        'today': 'Bugün',
+        'yesterday': 'Dün',
+        'previous': 'Önceki',
+        'no_chats': 'Henüz sohbet yok',
+        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
     }
 }
 
@@ -159,6 +182,11 @@ def melike_chat():
 def eda_chat():
     """Eda-AI chat page."""
     return render_template('chat.html', bot=CHATBOTS['eda'])
+
+@app.route('/can')
+def can_chat():
+    """Can-AI chat page."""
+    return render_template('chat.html', bot=CHATBOTS['can'])
 
 # ============== Chat API ==============
 
