@@ -91,7 +91,7 @@ CHATBOTS = {
         'short_name': 'Asistan',
         'icon': '💜',
         'prompt_id': 'pmpt_69580dccde088194aab560e77f08932c0e3a18c90eedd3b9',
-        'prompt_version': '4',
+        'prompt_version': '5',
         'accent_color': '#ec4899',  # Pink
         'welcome_title': 'Merhaba Melike! 👋',
         'welcome_text': 'Bugün sana nasıl yardımcı olabilirim? İstediğin her konuda yanındayım.',
