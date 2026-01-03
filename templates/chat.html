@@ -212,14 +212,15 @@
 
         .suggestions {
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            flex-wrap: wrap;
+            gap: 10px;
             width: 100%;
-            max-width: 320px;
+            max-width: 500px;
+            justify-content: center;
         }
 
         .suggestion-btn {
-            padding: 12px 16px;
+            padding: 10px 16px;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-full);
@@ -228,18 +229,31 @@
             font-size: 13px;
             cursor: pointer;
             transition: all 0.2s ease;
-            text-align: left;
+            text-align: center;
+            white-space: nowrap;
         }
 
         .suggestion-btn:hover {
             border-color: var(--accent);
             color: var(--accent);
             background: var(--accent-soft);
-            transform: translateX(4px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .suggestion-btn:active {
-            transform: translateX(4px) scale(0.98);
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        @media (max-width: 480px) {
+            .suggestions {
+                max-width: 100%;
+                gap: 8px;
+            }
+            .suggestion-btn {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
         }
 
         /* Messages */
@@ -742,6 +756,177 @@
             background: var(--border);
             border-radius: 2px;
         }
+
+        /* Emotion Modal */
+        .emotion-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .emotion-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .emotion-modal {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .emotion-modal-overlay.show .emotion-modal {
+            transform: scale(1);
+        }
+
+        .emotion-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .emotion-modal-emoji {
+            font-size: 32px;
+        }
+
+        .emotion-modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .emotion-modal-section {
+            margin-bottom: 20px;
+        }
+
+        .emotion-modal-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .intensity-selector {
+            display: flex;
+            gap: 8px;
+            justify-content: space-between;
+        }
+
+        .intensity-btn {
+            flex: 1;
+            padding: 12px 8px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .intensity-btn:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        .intensity-btn.selected {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+        }
+
+        .intensity-btn .number {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .intensity-btn .label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .extra-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 14px;
+            resize: none;
+            min-height: 80px;
+            transition: border-color 0.2s ease;
+        }
+
+        .extra-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .extra-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .emotion-modal-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: var(--radius-full);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-btn-cancel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .modal-btn-cancel:hover {
+            background: var(--border);
+        }
+
+        .modal-btn-send {
+            background: var(--accent);
+            border: none;
+            color: white;
+        }
+
+        .modal-btn-send:hover {
+            filter: brightness(1.1);
+        }
+
+        .modal-btn-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -782,7 +967,11 @@
                     <p>{{ bot.welcome_text }}</p>
                             <div class="suggestions">
                         {% for suggestion in bot.suggestions %}
-                        <button class="suggestion-btn" onclick="sendSuggestion('{{ suggestion }}')">{{ suggestion }}</button>
+                        {% if suggestion is mapping %}
+                        <button class="suggestion-btn" onclick="openEmotionModal('{{ suggestion.display | replace("'", "\\'") }}', '{{ suggestion.message | replace("'", "\\'") }}')">{{ suggestion.display }}</button>
+                        {% else %}
+                        <button class="suggestion-btn" onclick="sendSuggestion('{{ suggestion | replace("'", "\\'") }}')">{{ suggestion }}</button>
+                        {% endif %}
                         {% endfor %}
                             </div>
                         </div>
@@ -826,6 +1015,52 @@
         </div>
     </div>
 
+    <!-- Emotion Modal -->
+    <div class="emotion-modal-overlay" id="emotionModalOverlay" onclick="closeEmotionModal()">
+        <div class="emotion-modal" onclick="event.stopPropagation()">
+            <div class="emotion-modal-header">
+                <span class="emotion-modal-emoji" id="modalEmoji">😰</span>
+                <span class="emotion-modal-title" id="modalTitle">Yükselen kaygı</span>
+            </div>
+            
+            <div class="emotion-modal-section">
+                <label class="emotion-modal-label">Şiddeti nasıl?</label>
+                <div class="intensity-selector">
+                    <button class="intensity-btn" onclick="selectIntensity(1)" data-intensity="1">
+                        <span class="number">1</span>
+                        <span class="label">Hafif</span>
+                    </button>
+                    <button class="intensity-btn" onclick="selectIntensity(2)" data-intensity="2">
+                        <span class="number">2</span>
+                        <span class="label">Az</span>
+                    </button>
+                    <button class="intensity-btn" onclick="selectIntensity(3)" data-intensity="3">
+                        <span class="number">3</span>
+                        <span class="label">Orta</span>
+                    </button>
+                    <button class="intensity-btn" onclick="selectIntensity(4)" data-intensity="4">
+                        <span class="number">4</span>
+                        <span class="label">Yoğun</span>
+                    </button>
+                    <button class="intensity-btn" onclick="selectIntensity(5)" data-intensity="5">
+                        <span class="number">5</span>
+                        <span class="label">Çok</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="emotion-modal-section">
+                <label class="emotion-modal-label">Eklemek istediğin bir şey var mı?</label>
+                <textarea class="extra-input" id="extraInput" placeholder="(İsteğe bağlı)"></textarea>
+            </div>
+            
+            <div class="emotion-modal-actions">
+                <button class="modal-btn modal-btn-cancel" onclick="closeEmotionModal()">İptal</button>
+                <button class="modal-btn modal-btn-send" id="modalSendBtn" onclick="sendEmotionMessage()" disabled>Gönder</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const BOT = {
             id: '{{ bot.id }}',
@@ -846,6 +1081,60 @@
         let timerInterval = null;
         let timerStartTime = null;
         let conversations = [];
+
+        // Emotion Modal State
+        let currentEmotionDisplay = '';
+        let currentEmotionMessage = '';
+        let selectedIntensity = null;
+
+        // Emotion Modal Functions
+        function openEmotionModal(display, message) {
+            currentEmotionDisplay = display;
+            currentEmotionMessage = message;
+            selectedIntensity = null;
+            
+            // Extract emoji and title from display
+            const emoji = display.match(/^[\p{Emoji}]/u)?.[0] || '💭';
+            const title = display.replace(/^[\p{Emoji}]\s*/u, '');
+            
+            document.getElementById('modalEmoji').textContent = emoji;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('extraInput').value = '';
+            document.getElementById('modalSendBtn').disabled = true;
+            
+            // Reset intensity buttons
+            document.querySelectorAll('.intensity-btn').forEach(btn => btn.classList.remove('selected'));
+            
+            document.getElementById('emotionModalOverlay').classList.add('show');
+        }
+
+        function closeEmotionModal() {
+            document.getElementById('emotionModalOverlay').classList.remove('show');
+        }
+
+        function selectIntensity(level) {
+            selectedIntensity = level;
+            document.querySelectorAll('.intensity-btn').forEach(btn => {
+                btn.classList.toggle('selected', parseInt(btn.dataset.intensity) === level);
+            });
+            document.getElementById('modalSendBtn').disabled = false;
+        }
+
+        function sendEmotionMessage() {
+            if (!selectedIntensity) return;
+            
+            const intensityLabels = {1: 'çok hafif', 2: 'hafif', 3: 'orta', 4: 'yoğun', 5: 'çok yoğun'};
+            const extraText = document.getElementById('extraInput').value.trim();
+            
+            let message = `${currentEmotionMessage} Şiddeti: ${selectedIntensity}/5 (${intensityLabels[selectedIntensity]}).`;
+            
+            if (extraText) {
+                message += ` Eklemek istediğim: ${extraText}`;
+            }
+            
+            closeEmotionModal();
+            sendSuggestion(message);
+        }
 
         // History Functions
         async function loadHistory() {
@@ -960,13 +1249,23 @@
             sessionId = BOT.id + '_' + Math.random().toString(36).substr(2, 9);
             
             const content = document.getElementById('chatContent');
+            const suggestionsHtml = BOT.suggestions.map(s => {
+                if (typeof s === 'object' && s.display && s.message) {
+                    const displayEscaped = s.display.replace(/'/g, "\\'");
+                    const messageEscaped = s.message.replace(/'/g, "\\'");
+                    return `<button class="suggestion-btn" onclick="openEmotionModal('${displayEscaped}', '${messageEscaped}')">${s.display}</button>`;
+                } else {
+                    return `<button class="suggestion-btn" onclick="sendSuggestion('${String(s).replace(/'/g, "\\'")}')">${s}</button>`;
+                }
+            }).join('');
+            
             content.innerHTML = `
                 <div class="welcome" id="welcome">
                     <div class="welcome-avatar">${BOT.icon}</div>
                     <h2>${BOT.welcomeTitle}</h2>
                     <p>${BOT.welcomeText}</p>
                     <div class="suggestions">
-                        ${BOT.suggestions.map(s => `<button class="suggestion-btn" onclick="sendSuggestion('${s.replace(/'/g, "\\'")}')">${s}</button>`).join('')}
+                        ${suggestionsHtml}
                     </div>
                 </div>
             `;
