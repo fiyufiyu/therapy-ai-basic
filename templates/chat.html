@@ -628,11 +628,11 @@
             border-radius: var(--radius-md);
             cursor: pointer;
             transition: all 0.15s ease;
-        }
+            }
 
         .history-item:hover {
             background: var(--bg-secondary);
-        }
+            }
 
         .history-item.active {
             background: var(--accent-soft);
@@ -640,12 +640,12 @@
 
         .history-item-icon {
             color: var(--text-muted);
-        }
+            }
 
         .history-item-icon svg {
             width: 16px;
             height: 16px;
-        }
+            }
 
         .history-item-text {
             flex: 1;
@@ -654,7 +654,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-        }
+            }
 
         .history-item-delete {
             opacity: 0;
@@ -668,17 +668,17 @@
 
         .history-item:hover .history-item-delete {
             opacity: 1;
-        }
+            }
 
         .history-item-delete:hover {
             background: #fef2f2;
             color: #dc2626;
-        }
+            }
 
         .history-item-delete svg {
             width: 14px;
             height: 14px;
-        }
+            }
 
         .history-empty {
             text-align: center;
@@ -760,7 +760,7 @@
                     <div class="status">
                         <span class="status-dot"></span>
                         <span>Çevrimiçi</span>
-                    </div>
+            </div>
                 </div>
             </div>
             <div class="header-actions">
@@ -770,44 +770,44 @@
                     </svg>
                 </button>
             </div>
-        </header>
+            </header>
 
         <!-- Chat Area -->
         <div class="chat-area" id="chatArea">
             <div class="chat-content" id="chatContent">
                 <!-- Welcome or Messages -->
-                <div class="welcome" id="welcome">
+                        <div class="welcome" id="welcome">
                     <div class="welcome-avatar">{{ bot.icon }}</div>
                     <h2>{{ bot.welcome_title }}</h2>
                     <p>{{ bot.welcome_text }}</p>
-                    <div class="suggestions">
+                            <div class="suggestions">
                         {% for suggestion in bot.suggestions %}
                         <button class="suggestion-btn" onclick="sendSuggestion('{{ suggestion }}')">{{ suggestion }}</button>
                         {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Input Area -->
-        <div class="input-area">
-            <div class="input-container">
-                <textarea 
-                    id="userInput" 
+                <!-- Input Area -->
+                <div class="input-area">
+                    <div class="input-container">
+                            <textarea 
+                                id="userInput" 
                     placeholder="{{ bot.input_placeholder }}" 
-                    rows="1"
-                    onkeydown="handleKeyDown(event)"
-                    oninput="autoResize(this)"
-                ></textarea>
-                <button class="send-btn" id="sendBtn" onclick="sendMessage()">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                    </svg>
-                </button>
-            </div>
+                                rows="1"
+                                onkeydown="handleKeyDown(event)"
+                                oninput="autoResize(this)"
+                            ></textarea>
+                            <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                                </svg>
+                            </button>
+                        </div>
             <div class="input-hint">{{ bot.input_hint }}</div>
-        </div>
-    </div>
+                    </div>
+                </div>
 
     <!-- History Panel -->
     <div class="history-overlay" id="historyOverlay" onclick="closeHistory()">
@@ -1035,7 +1035,7 @@
                 timerInterval = null;
             }
             const elapsed = timerStartTime ? Math.floor((Date.now() - timerStartTime) / 1000) : 0;
-            timerStartTime = null;
+                timerStartTime = null;
             return elapsed;
         }
 
