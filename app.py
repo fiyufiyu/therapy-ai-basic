@@ -44,6 +44,7 @@ CHATBOTS = {
         'name': 'Symbiont',
         'short_name': 'Symbiont',
         'icon': '🧠',
+        'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_6957e6ae66088195af2b5053af22c7ae0f5f0db59da0747b',
         'prompt_version': '20',
         'accent_color': '#10a37f',  # Green
@@ -73,7 +74,8 @@ CHATBOTS = {
         'id': 'cihan',
         'name': 'Symbiont',
         'short_name': 'Symbiont',
-        'icon': '🤖',
+        'icon': '🧠',
+        'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_6957fe7589408195b68e4afa711750cb0976d4371a952f32',
         'prompt_version': '7',
         'accent_color': '#6366f1',  # Purple/Indigo
@@ -103,7 +105,8 @@ CHATBOTS = {
         'id': 'melike',
         'name': 'Symbiont',
         'short_name': 'Symbiont',
-        'icon': '💜',
+        'icon': '🧠',
+        'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_69580dccde088194aab560e77f08932c0e3a18c90eedd3b9',
         'prompt_version': '6',
         'accent_color': '#ec4899',  # Pink
@@ -133,7 +136,8 @@ CHATBOTS = {
         'id': 'eda',
         'name': 'Symbiont',
         'short_name': 'Symbiont',
-        'icon': '🧡',
+        'icon': '🧠',
+        'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_695958416b2081978b087eb082a52f6e031bfc22cd5d10b0',
         'prompt_version': '3',
         'accent_color': '#f97316',  # Orange
@@ -163,7 +167,8 @@ CHATBOTS = {
         'id': 'can',
         'name': 'Symbiont',
         'short_name': 'Symbiont',
-        'icon': '🔵',
+        'icon': '🧠',
+        'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_69596825aeec819093917a7d6078509801eec0b63cd76647',
         'prompt_version': '2',
         'accent_color': '#3b82f6',  # Blue
@@ -433,16 +438,6 @@ Kurallar:
 @app.route('/api/conversations/<conversation_id>/summarize', methods=['POST'])
 def summarize_session(conversation_id):
     """Generate a session summary for a conversation."""
-    bot_id = request.json.get('bot_id', 'meliksah') if request.json else 'meliksah'
-    
-    # Only allow for meliksah for now
-    if bot_id != 'meliksah':
-        return jsonify({
-            'error': 'Feature not available',
-            'error_type': 'feature_error',
-            'details': 'Bu özellik şu an sadece belirli kullanıcılar için aktif.'
-        }), 403
-    
     # Get conversation messages
     messages = db.get_messages(conversation_id)
     if not messages:
@@ -523,6 +518,26 @@ def clear_conversation():
     session_id = data.get('session_id', 'default')
     db.clear_messages(session_id)
     return jsonify({'status': 'cleared'})
+
+# ============== XP System API ==============
+
+@app.route('/api/xp/<bot_id>', methods=['GET'])
+def get_xp(bot_id):
+    """Get XP data for a user."""
+    xp_data = db.get_user_xp(bot_id)
+    return jsonify(xp_data)
+
+@app.route('/api/xp/<bot_id>', methods=['POST'])
+def add_xp_endpoint(bot_id):
+    """Add XP for a user."""
+    data = request.json
+    xp_amount = data.get('xp', 0)
+    
+    if xp_amount <= 0:
+        return jsonify({'error': 'Invalid XP amount'}), 400
+    
+    xp_data = db.add_xp(bot_id, xp_amount)
+    return jsonify(xp_data)
 
 if __name__ == '__main__':
     import os

@@ -86,6 +86,13 @@
             justify-content: center;
             font-size: 18px;
             box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .header-info h1 {
@@ -119,6 +126,203 @@
         .header-actions {
             display: flex;
             gap: 8px;
+        }
+
+        /* XP Progress Bar */
+        .xp-container {
+            display: none;
+            padding: 8px 16px 12px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .xp-container.visible {
+            display: block;
+        }
+
+        .xp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .xp-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .xp-title svg {
+            width: 14px;
+            height: 14px;
+            color: var(--accent);
+        }
+
+        .xp-level {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+        }
+
+        .xp-bar-container {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .xp-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent) 0%, #0d8a6a 100%);
+            border-radius: var(--radius-full);
+            transition: width 0.5s ease-out;
+            position: relative;
+        }
+
+        .xp-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .xp-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4px;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* XP Popup Animation */
+        .xp-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            background: var(--bg-card);
+            border: 2px solid var(--accent);
+            border-radius: var(--radius-lg);
+            padding: 16px 24px;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .xp-popup.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .xp-popup-content {
+            text-align: center;
+        }
+
+        .xp-popup-badge {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .xp-popup-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .xp-popup-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Level Up Animation */
+        .level-up-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .level-up-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .level-up-modal {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 32px 40px;
+            text-align: center;
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 60px rgba(16, 163, 127, 0.4);
+        }
+
+        .level-up-overlay.show .level-up-modal {
+            transform: scale(1);
+        }
+
+        .level-up-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            animation: bounce-in 0.6s ease;
+        }
+
+        @keyframes bounce-in {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .level-up-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .level-up-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .level-up-message {
+            font-size: 13px;
+            color: var(--text-muted);
+            max-width: 280px;
+            line-height: 1.5;
         }
 
         .icon-btn {
@@ -183,16 +387,23 @@
         }
 
         .welcome-avatar {
-            width: 72px;
-            height: 72px;
+            width: 100px;
+            height: 100px;
             border-radius: var(--radius-lg);
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent)aa 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 32px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .welcome-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .welcome h2 {
@@ -287,6 +498,13 @@
             justify-content: center;
             font-size: 14px;
             flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .message-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .message.assistant .message-avatar {
@@ -938,11 +1156,139 @@
         /* Actions Drop-up Menu */
         .actions-dropup {
             position: relative;
-            display: none;
+            display: block;
         }
 
-        .actions-dropup.visible {
+        /* Timer Display */
+        .therapy-timer {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent-medium) 100%);
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            border: 1px solid var(--accent)40;
+        }
+
+        .therapy-timer.active {
+            display: flex;
+        }
+
+        .therapy-timer svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .therapy-timer.warning {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #b45309;
+            border-color: #f59e0b40;
+        }
+
+        .therapy-timer.ending {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            color: #dc2626;
+            border-color: #ef444440;
+            animation: pulse-red 1s infinite;
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Duration Options (shown directly in menu) */
+        .duration-options {
+            display: none;
+            padding: 8px 0;
+            border-top: 1px solid var(--border-soft);
+            margin-top: 4px;
+        }
+
+        .duration-options.show {
             display: block;
+        }
+
+        .duration-option-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 10px 14px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            color: var(--text-primary);
+            text-align: left;
+            transition: all 0.15s ease;
+        }
+
+        .duration-option-btn:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .duration-option-btn svg {
+            width: 16px;
+            height: 16px;
+            color: var(--text-muted);
+        }
+
+        .duration-option-btn:hover svg {
+            color: var(--accent);
+        }
+
+        /* Custom duration input */
+        .custom-duration-row {
+            display: none;
+            padding: 8px 14px;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .custom-duration-row.show {
+            display: flex;
+        }
+
+        .custom-duration-row input {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .custom-duration-row input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .custom-duration-row span {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .custom-duration-row button {
+            padding: 8px 12px;
+            background: var(--accent);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .custom-duration-row button:hover {
+            filter: brightness(1.1);
         }
 
         .actions-trigger {
@@ -1219,13 +1565,20 @@
                         <path d="M3 12h18M3 6h18M3 18h18"/>
                     </svg>
                 </button>
-                <div class="avatar">{{ bot.icon }}</div>
+                <div class="avatar"><img src="{{ bot.logo }}" alt="{{ bot.name }}"></div>
                 <div class="header-info">
                     <h1>{{ bot.name }}</h1>
                     <div class="status">
                         <span class="status-dot"></span>
                         <span>Çevrimiçi</span>
-            </div>
+                    </div>
+                </div>
+                <div class="therapy-timer" id="therapyTimer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                    <span id="timerDisplay">05:00</span>
                 </div>
             </div>
             <div class="header-actions">
@@ -1237,12 +1590,51 @@
             </div>
             </header>
 
+        <!-- XP Progress Bar -->
+        <div class="xp-container visible" id="xpContainer">
+            <div class="xp-header">
+                <div class="xp-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    <span>Seni Tanıma Seviyesi</span>
+                </div>
+                <div class="xp-level" id="xpLevel">Seviye 1</div>
+            </div>
+            <div class="xp-bar-container">
+                <div class="xp-bar" id="xpBar" style="width: 0%"></div>
+            </div>
+            <div class="xp-info">
+                <span id="xpCurrent">0 XP</span>
+                <span id="xpNext">Sonraki: 100 XP</span>
+            </div>
+        </div>
+
+        <!-- XP Popup -->
+        <div class="xp-popup" id="xpPopup">
+            <div class="xp-popup-content">
+                <div class="xp-popup-badge" id="xpPopupBadge">Uzun Mesaj</div>
+                <div class="xp-popup-amount" id="xpPopupAmount">+30 XP</div>
+                <div class="xp-popup-label">Teşekkürler, seni daha iyi tanıyorum!</div>
+            </div>
+        </div>
+
+        <!-- Level Up Modal -->
+        <div class="level-up-overlay" id="levelUpOverlay" onclick="closeLevelUp()">
+            <div class="level-up-modal" onclick="event.stopPropagation()">
+                <div class="level-up-icon">🎉</div>
+                <div class="level-up-title" id="levelUpTitle">Seviye 2!</div>
+                <div class="level-up-subtitle">Tebrikler!</div>
+                <div class="level-up-message" id="levelUpMessage">Seninle olan bağımız güçleniyor. Artık seni daha iyi anlayabiliyorum.</div>
+            </div>
+        </div>
+
         <!-- Chat Area -->
         <div class="chat-area" id="chatArea">
             <div class="chat-content" id="chatContent">
                 <!-- Welcome or Messages -->
                         <div class="welcome" id="welcome">
-                    <div class="welcome-avatar">{{ bot.icon }}</div>
+                    <div class="welcome-avatar"><img src="{{ bot.logo }}" alt="{{ bot.name }}"></div>
                     <h2>{{ bot.welcome_title }}</h2>
                     <p>{{ bot.welcome_text }}</p>
                             <div class="suggestions">
@@ -1261,7 +1653,6 @@
                 <!-- Input Area -->
                 <div class="input-area">
                     <div class="input-row">
-                        {% if bot.id == 'meliksah' %}
                         <div class="actions-dropup" id="actionsDropup">
                             <button class="actions-trigger" id="actionsTrigger" onclick="toggleActionsMenu()" title="Aksiyonlar">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1270,6 +1661,58 @@
                                 </svg>
                             </button>
                             <div class="actions-menu" id="actionsMenu">
+                                <!-- Terapi Süresi Seçimi -->
+                                <button class="actions-menu-item" onclick="toggleDurationOptions(event)">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 6v6l4 2"/>
+                                    </svg>
+                                    <span>Terapi Süresi Belirle</span>
+                                    <svg id="durationArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px; margin-left: auto; transition: transform 0.2s;">
+                                        <path d="M6 9l6 6 6-6"/>
+                                    </svg>
+                                </button>
+                                
+                                <!-- Süre Seçenekleri -->
+                                <div class="duration-options" id="durationOptions">
+                                    <button class="duration-option-btn" onclick="setTherapyDuration(1)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 6v6"/>
+                                        </svg>
+                                        1 dakika
+                                    </button>
+                                    <button class="duration-option-btn" onclick="setTherapyDuration(5)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 6v6l3 1.5"/>
+                                        </svg>
+                                        5 dakika
+                                    </button>
+                                    <button class="duration-option-btn" onclick="setTherapyDuration(10)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M12 6v6l4 2"/>
+                                        </svg>
+                                        10 dakika
+                                    </button>
+                                    <button class="duration-option-btn" onclick="toggleCustomDuration(event)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                                            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                        </svg>
+                                        Kendiniz girin...
+                                    </button>
+                                    <div class="custom-duration-row" id="customDurationRow">
+                                        <input type="number" id="customMinutes" min="1" max="60" placeholder="5">
+                                        <span>dakika</span>
+                                        <button onclick="setCustomDuration()">Başlat</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="actions-menu-divider"></div>
+                                
+                                <!-- Seansı Özetle -->
                                 <button class="actions-menu-item summary-item" onclick="handleSummarizeSession()">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
@@ -1280,7 +1723,6 @@
                                 </button>
                             </div>
                         </div>
-                        {% endif %}
                         <div class="input-container">
                             <textarea 
                                 id="userInput" 
@@ -1399,6 +1841,7 @@
             name: '{{ bot.name }}',
             shortName: '{{ bot.short_name }}',
             icon: '{{ bot.icon }}',
+            logo: '{{ bot.logo }}',
             welcomeTitle: '{{ bot.welcome_title }}',
             welcomeText: '{{ bot.welcome_text }}',
             suggestions: {{ bot.suggestions | tojson }},
@@ -1413,6 +1856,302 @@
         let timerInterval = null;
         let timerStartTime = null;
         let conversations = [];
+
+        // ============== XP System (Meliksah Only) ==============
+        const XP_CONFIG = {
+            shortMessageThreshold: 50,    // chars
+            mediumMessageThreshold: 150,  // chars
+            shortXP: 5,
+            mediumXP: 15,
+            longXP: 30,
+            levelThresholds: [0, 100, 250, 500, 850, 1300, 1850, 2500, 3250, 4100, 5000],
+            levelMessages: [
+                "Yeni bir yolculuğa başladık!",
+                "Seninle olan bağımız güçleniyor. Artık seni daha iyi anlayabiliyorum.",
+                "Paylaştıkların bana çok şey öğretiyor. Teşekkürler!",
+                "Seni tanımak güzel, derinleşiyoruz.",
+                "Birlikte güzel bir yol katetik. Seninle gurur duyuyorum!",
+                "Artık seni gerçekten tanıyorum. Bu özel bir bağ.",
+                "Senin için daha iyi bir rehber olabiliyorum artık.",
+                "Bu seviyeye ulaşan çok az kişi var. Tebrikler!",
+                "Seninle olan yolculuğumuz muhteşem!",
+                "Maksimum bağlantı! Artık seni çok iyi tanıyorum."
+            ]
+        };
+
+        let userXP = 0;
+        let userLevel = 1;
+
+        async function loadXP() {
+            try {
+                const response = await fetch(`/api/xp/${BOT.id}`);
+                const data = await response.json();
+                
+                userXP = data.xp || 0;
+                userLevel = data.level || 1;
+                updateXPDisplay();
+            } catch (e) {
+                console.error('Failed to load XP:', e);
+                // Fallback to localStorage
+                const savedXP = localStorage.getItem('symbiont_xp_' + BOT.id);
+                if (savedXP) {
+                    userXP = parseInt(savedXP, 10);
+                    userLevel = calculateLevel(userXP);
+                    updateXPDisplay();
+                }
+            }
+        }
+
+        async function saveXP(xpAmount) {
+            try {
+                await fetch(`/api/xp/${BOT.id}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ xp: xpAmount })
+                });
+            } catch (e) {
+                console.error('Failed to save XP:', e);
+                // Fallback to localStorage
+                localStorage.setItem('symbiont_xp_' + BOT.id, userXP.toString());
+            }
+        }
+
+        function calculateLevel(xp) {
+            for (let i = XP_CONFIG.levelThresholds.length - 1; i >= 0; i--) {
+                if (xp >= XP_CONFIG.levelThresholds[i]) {
+                    return i + 1;
+                }
+            }
+            return 1;
+        }
+
+        function getXPForMessage(message) {
+            const length = message.trim().length;
+            if (length < XP_CONFIG.shortMessageThreshold) {
+                return { xp: XP_CONFIG.shortXP, type: 'Kısa Mesaj', emoji: '💬' };
+            } else if (length < XP_CONFIG.mediumMessageThreshold) {
+                return { xp: XP_CONFIG.mediumXP, type: 'Orta Mesaj', emoji: '📝' };
+            } else {
+                return { xp: XP_CONFIG.longXP, type: 'Uzun Mesaj', emoji: '📖' };
+            }
+        }
+
+        async function addXP(message) {
+            const xpGain = getXPForMessage(message);
+            const oldLevel = userLevel;
+            
+            userXP += xpGain.xp;
+            userLevel = calculateLevel(userXP);
+            
+            // Save to database
+            await saveXP(xpGain.xp);
+            
+            updateXPDisplay();
+            showXPPopup(xpGain);
+            
+            // Check for level up
+            if (userLevel > oldLevel) {
+                setTimeout(() => showLevelUp(userLevel), 1500);
+            }
+        }
+
+        function updateXPDisplay() {
+            
+            const xpBar = document.getElementById('xpBar');
+            const xpLevel = document.getElementById('xpLevel');
+            const xpCurrent = document.getElementById('xpCurrent');
+            const xpNext = document.getElementById('xpNext');
+            
+            if (!xpBar) return;
+            
+            const currentLevelXP = XP_CONFIG.levelThresholds[userLevel - 1] || 0;
+            const nextLevelXP = XP_CONFIG.levelThresholds[userLevel] || XP_CONFIG.levelThresholds[XP_CONFIG.levelThresholds.length - 1];
+            const progressInLevel = userXP - currentLevelXP;
+            const xpNeededForLevel = nextLevelXP - currentLevelXP;
+            const percentage = Math.min((progressInLevel / xpNeededForLevel) * 100, 100);
+            
+            xpBar.style.width = percentage + '%';
+            xpLevel.textContent = 'Seviye ' + userLevel;
+            xpCurrent.textContent = userXP + ' XP';
+            xpNext.textContent = userLevel >= XP_CONFIG.levelThresholds.length 
+                ? 'Maksimum Seviye!' 
+                : 'Sonraki: ' + nextLevelXP + ' XP';
+        }
+
+        function showXPPopup(xpGain) {
+            
+            const popup = document.getElementById('xpPopup');
+            const badge = document.getElementById('xpPopupBadge');
+            const amount = document.getElementById('xpPopupAmount');
+            
+            if (!popup) return;
+            
+            badge.textContent = xpGain.emoji + ' ' + xpGain.type;
+            amount.textContent = '+' + xpGain.xp + ' XP';
+            
+            popup.classList.add('show');
+            
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 3000);
+        }
+
+        function showLevelUp(level) {
+            
+            const overlay = document.getElementById('levelUpOverlay');
+            const title = document.getElementById('levelUpTitle');
+            const message = document.getElementById('levelUpMessage');
+            
+            if (!overlay) return;
+            
+            title.textContent = 'Seviye ' + level + '!';
+            message.textContent = XP_CONFIG.levelMessages[level - 1] || 'Tebrikler!';
+            
+            overlay.classList.add('show');
+            
+            // Auto close after 3 seconds
+            setTimeout(() => {
+                closeLevelUp();
+            }, 3000);
+        }
+
+        function closeLevelUp() {
+            const overlay = document.getElementById('levelUpOverlay');
+            if (overlay) overlay.classList.remove('show');
+        }
+
+        // ============== Therapy Timer System ==============
+        let therapyTimerInterval = null;
+        let therapyTimeRemaining = 0;
+
+        function setTherapyDuration(minutes) {
+            
+            therapyTimeRemaining = minutes * 60;
+            startTherapyTimer();
+            hideDurationOptions();
+            closeActionsMenu();
+        }
+
+        function setCustomDuration() {
+            const input = document.getElementById('customMinutes');
+            if (!input) return;
+            
+            const minutes = parseInt(input.value, 10);
+            if (minutes > 0 && minutes <= 60) {
+                setTherapyDuration(minutes);
+                input.value = '';
+                hideDurationOptions();
+            }
+        }
+
+        function startTherapyTimer() {
+            
+            // Clear any existing timer
+            if (therapyTimerInterval) {
+                clearInterval(therapyTimerInterval);
+            }
+            
+            const timerElement = document.getElementById('therapyTimer');
+            const displayElement = document.getElementById('timerDisplay');
+            
+            if (!timerElement || !displayElement) return;
+            
+            timerElement.classList.add('active');
+            timerElement.classList.remove('warning', 'ending');
+            updateTimerDisplay();
+            
+            therapyTimerInterval = setInterval(() => {
+                therapyTimeRemaining--;
+                
+                if (therapyTimeRemaining <= 0) {
+                    clearInterval(therapyTimerInterval);
+                    therapyTimerInterval = null;
+                    timerElement.classList.remove('active', 'warning', 'ending');
+                    showTimerEndNotification();
+                    return;
+                }
+                
+                // Warning at 1 minute remaining
+                if (therapyTimeRemaining <= 60 && therapyTimeRemaining > 10) {
+                    timerElement.classList.add('warning');
+                    timerElement.classList.remove('ending');
+                }
+                
+                // Critical at 10 seconds remaining
+                if (therapyTimeRemaining <= 10) {
+                    timerElement.classList.remove('warning');
+                    timerElement.classList.add('ending');
+                }
+                
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const displayElement = document.getElementById('timerDisplay');
+            if (!displayElement) return;
+            
+            const minutes = Math.floor(therapyTimeRemaining / 60);
+            const seconds = therapyTimeRemaining % 60;
+            displayElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function showTimerEndNotification() {
+            // Show a notification that therapy time is up
+            const overlay = document.getElementById('levelUpOverlay');
+            const title = document.getElementById('levelUpTitle');
+            const message = document.getElementById('levelUpMessage');
+            const icon = document.querySelector('.level-up-icon');
+            
+            if (!overlay) return;
+            
+            if (icon) icon.textContent = '⏰';
+            if (title) title.textContent = 'Süre Doldu!';
+            if (message) message.textContent = 'Terapi süreniz tamamlandı. Kendinize ayırdığınız bu zaman için tebrikler! İsterseniz "Seansı Bitir ve Özetle" ile özetinizi alabilirsiniz.';
+            
+            overlay.classList.add('show');
+            
+            setTimeout(() => {
+                closeLevelUp();
+                // Reset icon for level up
+                if (icon) icon.textContent = '🎉';
+            }, 5000);
+        }
+
+        function toggleDurationOptions(event) {
+            event.stopPropagation();
+            const options = document.getElementById('durationOptions');
+            const arrow = document.getElementById('durationArrow');
+            
+            if (options) {
+                options.classList.toggle('show');
+                if (arrow) {
+                    arrow.style.transform = options.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0)';
+                }
+            }
+        }
+
+        function toggleCustomDuration(event) {
+            event.stopPropagation();
+            const customRow = document.getElementById('customDurationRow');
+            if (customRow) {
+                customRow.classList.toggle('show');
+                if (customRow.classList.contains('show')) {
+                    const input = document.getElementById('customMinutes');
+                    if (input) input.focus();
+                }
+            }
+        }
+
+        function hideDurationOptions() {
+            const options = document.getElementById('durationOptions');
+            const arrow = document.getElementById('durationArrow');
+            const customRow = document.getElementById('customDurationRow');
+            
+            if (options) options.classList.remove('show');
+            if (arrow) arrow.style.transform = 'rotate(0)';
+            if (customRow) customRow.classList.remove('show');
+        }
 
         // Emotion Modal State
         let currentEmotionDisplay = '';
@@ -1470,18 +2209,8 @@
 
         // Actions Dropup Functions
         function updateActionsDropupVisibility() {
-            const actionsDropup = document.getElementById('actionsDropup');
-            if (!actionsDropup) return; // Not meliksah bot
-            
-            const messages = document.getElementById('messages');
-            const hasMessages = messages && messages.children.length > 0;
-            
-            if (hasMessages) {
-                actionsDropup.classList.add('visible');
-            } else {
-                actionsDropup.classList.remove('visible');
-                closeActionsMenu();
-            }
+            // Drop-up is now always visible, this function is kept for compatibility
+            return;
         }
 
         function toggleActionsMenu() {
@@ -1502,6 +2231,7 @@
             
             if (trigger) trigger.classList.remove('active');
             if (menu) menu.classList.remove('show');
+            hideDurationOptions();
         }
 
         function handleSummarizeSession() {
@@ -1712,7 +2442,7 @@
             
             content.innerHTML = `
                 <div class="welcome" id="welcome">
-                    <div class="welcome-avatar">${BOT.icon}</div>
+                    <div class="welcome-avatar"><img src="${BOT.logo}" alt="${BOT.name}"></div>
                     <h2>${BOT.welcomeTitle}</h2>
                     <p>${BOT.welcomeText}</p>
                     <div class="suggestions">
@@ -1821,6 +2551,7 @@
 
             addMessage(message, 'user');
             updateActionsDropupVisibility();
+            addXP(message);  // Add XP for sending message
             input.value = '';
             input.style.height = 'auto';
 
@@ -1884,7 +2615,7 @@
             const div = document.createElement('div');
             div.className = `message ${role}`;
             
-            const avatar = role === 'user' ? '👤' : BOT.icon;
+            const avatarContent = role === 'user' ? '👤' : `<img src="${BOT.logo}" alt="${BOT.name}">`;
             const formattedContent = role === 'assistant' ? parseMarkdown(content) : escapeHtml(content);
             const timestamp = formatTimestamp(createdAt);
             
@@ -1893,7 +2624,7 @@
                 : '';
             
             div.innerHTML = `
-                <div class="message-avatar">${avatar}</div>
+                <div class="message-avatar">${avatarContent}</div>
                 <div>
                     <div class="message-bubble">${formattedContent}</div>
                     <div class="message-meta">
@@ -1933,7 +2664,7 @@
             const div = document.createElement('div');
             div.className = 'typing';
             div.innerHTML = `
-                <div class="message-avatar" style="background: linear-gradient(135deg, var(--accent) 0%, var(--accent)cc 100%);">${BOT.icon}</div>
+                <div class="message-avatar" style="background: linear-gradient(135deg, var(--accent) 0%, var(--accent)cc 100%);"><img src="${BOT.logo}" alt="${BOT.name}"></div>
                 <div class="typing-bubble">
                     <div class="typing-dots">
                         <span></span><span></span><span></span>
@@ -1963,6 +2694,7 @@
         // Init
         document.addEventListener('DOMContentLoaded', () => {
             loadHistory();
+            loadXP();  // Load saved XP
             if (window.innerWidth > 768) {
                 document.getElementById('userInput').focus();
             }

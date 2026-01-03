@@ -97,6 +97,16 @@ def init_db():
                 CREATE INDEX IF NOT EXISTS idx_messages_conversation 
                 ON messages(conversation_id)
             ''')
+            
+            # User XP table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS user_xp (
+                    bot_id TEXT PRIMARY KEY,
+                    xp INTEGER DEFAULT 0,
+                    level INTEGER DEFAULT 1,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
         else:
             cursor = conn.cursor()
             
@@ -140,6 +150,16 @@ def init_db():
             cursor.execute('''
                 CREATE INDEX IF NOT EXISTS idx_messages_conversation 
                 ON messages(conversation_id)
+            ''')
+            
+            # User XP table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS user_xp (
+                    bot_id TEXT PRIMARY KEY,
+                    xp INTEGER DEFAULT 0,
+                    level INTEGER DEFAULT 1,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
             ''')
         
         print("Database initialized successfully!")
@@ -389,6 +409,75 @@ def clear_messages(conversation_id: str):
         else:
             cursor = conn.cursor()
             cursor.execute('DELETE FROM messages WHERE conversation_id = ?', (conversation_id,))
+
+
+# XP operations
+def get_user_xp(bot_id: str) -> dict:
+    """Get XP data for a user/bot."""
+    with get_db() as conn:
+        if USE_POSTGRES:
+            cursor = conn.cursor(cursor_factory=RealDictCursor)
+            cursor.execute('SELECT * FROM user_xp WHERE bot_id = %s', (bot_id,))
+        else:
+            cursor = conn.cursor()
+            cursor.execute('SELECT * FROM user_xp WHERE bot_id = ?', (bot_id,))
+        
+        row = cursor.fetchone()
+        if row:
+            return dict(row)
+        else:
+            # Return default values if no record exists
+            return {'bot_id': bot_id, 'xp': 0, 'level': 1}
+
+
+def update_user_xp(bot_id: str, xp: int, level: int) -> dict:
+    """Update or create XP data for a user/bot."""
+    with get_db() as conn:
+        if USE_POSTGRES:
+            cursor = conn.cursor(cursor_factory=RealDictCursor)
+            now = datetime.now().isoformat()
+            
+            # Upsert - insert or update
+            cursor.execute('''
+                INSERT INTO user_xp (bot_id, xp, level, updated_at) 
+                VALUES (%s, %s, %s, %s)
+                ON CONFLICT (bot_id) 
+                DO UPDATE SET xp = %s, level = %s, updated_at = %s
+            ''', (bot_id, xp, level, now, xp, level, now))
+        else:
+            cursor = conn.cursor()
+            now = datetime.now().isoformat()
+            
+            # Check if exists
+            cursor.execute('SELECT bot_id FROM user_xp WHERE bot_id = ?', (bot_id,))
+            if cursor.fetchone():
+                cursor.execute(
+                    'UPDATE user_xp SET xp = ?, level = ?, updated_at = ? WHERE bot_id = ?',
+                    (xp, level, now, bot_id)
+                )
+            else:
+                cursor.execute(
+                    'INSERT INTO user_xp (bot_id, xp, level, updated_at) VALUES (?, ?, ?, ?)',
+                    (bot_id, xp, level, now)
+                )
+        
+        return {'bot_id': bot_id, 'xp': xp, 'level': level}
+
+
+def add_xp(bot_id: str, xp_amount: int) -> dict:
+    """Add XP to a user and calculate new level."""
+    current = get_user_xp(bot_id)
+    new_xp = current['xp'] + xp_amount
+    
+    # Calculate level based on XP thresholds
+    level_thresholds = [0, 100, 250, 500, 850, 1300, 1850, 2500, 3250, 4100, 5000]
+    new_level = 1
+    for i in range(len(level_thresholds) - 1, -1, -1):
+        if new_xp >= level_thresholds[i]:
+            new_level = i + 1
+            break
+    
+    return update_user_xp(bot_id, new_xp, new_level)
 
 
 # Initialize database on module import
