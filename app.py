@@ -68,7 +68,56 @@ CHATBOTS = {
         'yesterday': 'Dün',
         'previous': 'Önceki',
         'no_chats': 'Henüz sohbet yok',
-        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
+        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter',
+        'lang': 'tr',
+        # Turkish UI texts
+        'xp_title': 'Seni Tanıma Seviyesi',
+        'xp_level': 'Seviye',
+        'xp_next': 'Sonraki',
+        'xp_max': 'Maksimum Seviye!',
+        'timer_set': 'Terapi Süresi Belirle',
+        'timer_minute': 'dakika',
+        'timer_minutes': 'dakika',
+        'timer_custom': 'Kendiniz girin...',
+        'timer_start': 'Başlat',
+        'timer_ended': 'Süre Doldu!',
+        'timer_ended_msg': 'Terapi süreniz tamamlandı. Kendinize ayırdığınız bu zaman için tebrikler! İsterseniz "Seansı Bitir ve Özetle" ile özetinizi alabilirsiniz.',
+        'summarize': 'Seansı Bitir ve Özetle',
+        'summary_title': 'Seans Özeti',
+        'summary_loading': 'Seans özetleniyor...',
+        'summary_ok': 'Tamam',
+        'online': 'Çevrimiçi',
+        'chats': 'Sohbetler',
+        'delete_confirm': 'Bu sohbeti silmek istediğinize emin misiniz?',
+        'connection_error': 'Bağlantı Hatası',
+        'connection_failed': 'Sunucuya bağlanılamadı.',
+        'intensity_question': 'Şiddeti nasıl?',
+        'intensity_1': 'Hafif',
+        'intensity_2': 'Az',
+        'intensity_3': 'Orta',
+        'intensity_4': 'Yoğun',
+        'intensity_5': 'Çok',
+        'add_note': 'Eklemek istediğin bir şey var mı?',
+        'optional': '(İsteğe bağlı)',
+        'cancel': 'İptal',
+        'send': 'Gönder',
+        'short_msg': 'Kısa Mesaj',
+        'medium_msg': 'Orta Mesaj',
+        'long_msg': 'Uzun Mesaj',
+        'xp_thanks': 'Teşekkürler, seni daha iyi tanıyorum!',
+        'level_up_congrats': 'Tebrikler!',
+        'level_messages': [
+            "Yeni bir yolculuğa başladık!",
+            "Seninle olan bağımız güçleniyor. Artık seni daha iyi anlayabiliyorum.",
+            "Paylaştıkların bana çok şey öğretiyor. Teşekkürler!",
+            "Seni tanımak güzel, derinleşiyoruz.",
+            "Birlikte güzel bir yol katetik. Seninle gurur duyuyorum!",
+            "Artık seni gerçekten tanıyorum. Bu özel bir bağ.",
+            "Senin için daha iyi bir rehber olabiliyorum artık.",
+            "Bu seviyeye ulaşan çok az kişi var. Tebrikler!",
+            "Seninle olan yolculuğumuz muhteşem!",
+            "Maksimum bağlantı! Artık seni çok iyi tanıyorum."
+        ]
     },
     'cihan': {
         'id': 'cihan',
@@ -99,7 +148,43 @@ CHATBOTS = {
         'yesterday': 'Dün',
         'previous': 'Önceki',
         'no_chats': 'Henüz sohbet yok',
-        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
+        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter',
+        'lang': 'tr',
+        'xp_title': 'Seni Tanıma Seviyesi',
+        'xp_level': 'Seviye',
+        'xp_next': 'Sonraki',
+        'xp_max': 'Maksimum Seviye!',
+        'timer_set': 'Terapi Süresi Belirle',
+        'timer_minute': 'dakika',
+        'timer_minutes': 'dakika',
+        'timer_custom': 'Kendiniz girin...',
+        'timer_start': 'Başlat',
+        'timer_ended': 'Süre Doldu!',
+        'timer_ended_msg': 'Terapi süreniz tamamlandı. Kendinize ayırdığınız bu zaman için tebrikler!',
+        'summarize': 'Seansı Bitir ve Özetle',
+        'summary_title': 'Seans Özeti',
+        'summary_loading': 'Seans özetleniyor...',
+        'summary_ok': 'Tamam',
+        'online': 'Çevrimiçi',
+        'chats': 'Sohbetler',
+        'delete_confirm': 'Bu sohbeti silmek istediğinize emin misiniz?',
+        'connection_error': 'Bağlantı Hatası',
+        'connection_failed': 'Sunucuya bağlanılamadı.',
+        'intensity_question': 'Şiddeti nasıl?',
+        'intensity_1': 'Hafif',
+        'intensity_2': 'Az',
+        'intensity_3': 'Orta',
+        'intensity_4': 'Yoğun',
+        'intensity_5': 'Çok',
+        'add_note': 'Eklemek istediğin bir şey var mı?',
+        'optional': '(İsteğe bağlı)',
+        'cancel': 'İptal',
+        'send': 'Gönder',
+        'short_msg': 'Kısa Mesaj',
+        'medium_msg': 'Orta Mesaj',
+        'long_msg': 'Uzun Mesaj',
+        'xp_thanks': 'Teşekkürler, seni daha iyi tanıyorum!',
+        'level_up_congrats': 'Tebrikler!'
     },
     'melike': {
         'id': 'melike',
@@ -193,6 +278,86 @@ CHATBOTS = {
         'previous': 'Önceki',
         'no_chats': 'Henüz sohbet yok',
         'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
+    },
+    'warriorsofcompassion': {
+        'id': 'warriorsofcompassion',
+        'name': 'Symbiont',
+        'short_name': 'Symbiont',
+        'icon': '🧠',
+        'logo': '/static/logo-symbiont.png',
+        'prompt_id': 'pmpt_6959a81350a081958e0480a132d5143605ab6f540d752f0f',
+        'prompt_version': '2',
+        'accent_color': '#10a37f',  # Green
+        'welcome_title': 'Hello Warriors of Compassion! 👋',
+        'welcome_text': "What's dominating right now?",
+        'suggestions': [
+            {'display': '😰 Rising anxiety', 'message': "I'm feeling rising anxiety right now."},
+            {'display': '🌊 Panic wave', 'message': "I feel like a panic wave is coming."},
+            {'display': '🌀 Racing thoughts', 'message': "My thoughts keep racing non-stop."},
+            {'display': '🛏️ Sleep lock', 'message': "I'm experiencing sleep lock, can't fall asleep."},
+            {'display': '🎯 Focus scatter', 'message': "I'm experiencing scattered focus."},
+            {'display': '⏰ Procrastination urge', 'message': "I'm feeling the urge to procrastinate."},
+            {'display': '🚧 Decision block', 'message': "I'm struggling to make decisions, feeling stuck."},
+            {'display': '💨 Inner tension', 'message': "I'm feeling tension inside."},
+            {'display': '🔥 Anger surge', 'message': "I feel anger rising inside me."},
+            {'display': '🌑 Loneliness', 'message': "I'm feeling lonely."}
+        ],
+        'input_placeholder': 'Type your message...',
+        'new_chat': 'New Chat',
+        'today': 'Today',
+        'yesterday': 'Yesterday',
+        'previous': 'Previous',
+        'no_chats': 'No chats yet',
+        'input_hint': 'Press Enter to send, Shift+Enter for new line',
+        'lang': 'en',
+        # English UI texts
+        'xp_title': 'Understanding Level',
+        'xp_level': 'Level',
+        'xp_next': 'Next',
+        'xp_max': 'Maximum Level!',
+        'timer_set': 'Set Therapy Duration',
+        'timer_minute': 'minute',
+        'timer_minutes': 'minutes',
+        'timer_custom': 'Enter custom...',
+        'timer_start': 'Start',
+        'timer_ended': 'Time is up!',
+        'timer_ended_msg': 'Your therapy session is complete. Congratulations on taking this time for yourself! You can use "End & Summarize" to get your session summary.',
+        'summarize': 'End & Summarize Session',
+        'summary_title': 'Session Summary',
+        'summary_loading': 'Summarizing session...',
+        'summary_ok': 'OK',
+        'online': 'Online',
+        'chats': 'Chats',
+        'delete_confirm': 'Are you sure you want to delete this chat?',
+        'connection_error': 'Connection Error',
+        'connection_failed': 'Could not connect to server.',
+        'intensity_question': "How intense is it?",
+        'intensity_1': 'Very Mild',
+        'intensity_2': 'Mild',
+        'intensity_3': 'Moderate',
+        'intensity_4': 'Intense',
+        'intensity_5': 'Very Intense',
+        'add_note': 'Anything you want to add?',
+        'optional': '(Optional)',
+        'cancel': 'Cancel',
+        'send': 'Send',
+        'short_msg': 'Short Message',
+        'medium_msg': 'Medium Message',
+        'long_msg': 'Long Message',
+        'xp_thanks': 'Thanks, I understand you better!',
+        'level_up_congrats': 'Congratulations!',
+        'level_messages': [
+            "A new journey begins!",
+            "Our connection is growing stronger. I can understand you better now.",
+            "What you share teaches me a lot. Thank you!",
+            "Getting to know you is wonderful, we're going deeper.",
+            "We've come a long way together. I'm proud of you!",
+            "I truly know you now. This is a special bond.",
+            "I can be a better guide for you now.",
+            "Very few reach this level. Congratulations!",
+            "Our journey together is amazing!",
+            "Maximum connection! I know you very well now."
+        ]
     }
 }
 
@@ -227,6 +392,11 @@ def eda_chat():
 def can_chat():
     """Can-AI chat page."""
     return render_template('chat.html', bot=CHATBOTS['can'])
+
+@app.route('/warriorsofcompassion')
+def warriorsofcompassion_chat():
+    """Warriors of Compassion English chat page."""
+    return render_template('chat.html', bot=CHATBOTS['warriorsofcompassion'])
 
 # ============== Chat API ==============
 
@@ -419,8 +589,8 @@ def update_title(conversation_id):
         db.update_conversation_title(conversation_id, title)
     return jsonify({'status': 'updated'})
 
-# Session Summary Prompt
-SESSION_SUMMARY_PROMPT = """Sen bir terapi seansı özetleyicisisin. Aşağıdaki seans konuşmasını analiz et ve TAM OLARAK şu formatta yanıt ver:
+# Session Summary Prompts
+SESSION_SUMMARY_PROMPT_TR = """Sen bir terapi seansı özetleyicisisin. Aşağıdaki seans konuşmasını analiz et ve TAM OLARAK şu formatta yanıt ver:
 
 **📝 Özet:** [Seansın ana temasını ve kullanıcının durumunu özetleyen TEK bir cümle]
 
@@ -435,16 +605,40 @@ Kurallar:
 - Kendine not kısmı sıcak ve destekleyici olmalı
 - Türkçe yaz"""
 
+SESSION_SUMMARY_PROMPT_EN = """You are a therapy session summarizer. Analyze the following session conversation and respond in EXACTLY this format:
+
+**📝 Summary:** [ONE sentence summarizing the main theme and user's state in the session]
+
+**🎯 Action:** [ONE specific, small, and actionable step the user can take]
+
+**💚 Note to Self:** [ONE supportive sentence with self-compassion or realistic encouragement]
+
+Rules:
+- Each section MUST be exactly one sentence
+- The summary sentence will also be used as the chat title, so keep it short and concise (max 50 characters)
+- The action must be concrete and immediately applicable
+- The note to self should be warm and supportive
+- Write in English"""
+
 @app.route('/api/conversations/<conversation_id>/summarize', methods=['POST'])
 def summarize_session(conversation_id):
     """Generate a session summary for a conversation."""
+    # Get bot_id from request to determine language
+    data = request.get_json() or {}
+    bot_id = data.get('bot_id', '')
+    
+    # Determine language from bot config
+    bot_config = CHATBOTS.get(bot_id, {})
+    is_english = bot_config.get('lang') == 'en'
+    
     # Get conversation messages
     messages = db.get_messages(conversation_id)
     if not messages:
+        error_msg = 'No messages to summarize.' if is_english else 'Özetlenecek mesaj bulunamadı.'
         return jsonify({
             'error': 'No messages',
             'error_type': 'validation_error',
-            'details': 'Özetlenecek mesaj bulunamadı.'
+            'details': error_msg
         }), 400
     
     # Check if API key is configured
@@ -457,18 +651,28 @@ def summarize_session(conversation_id):
         }), 500
     
     # Build conversation text for summary
-    conversation_text = "\n".join([
-        f"{'Kullanıcı' if m['role'] == 'user' else 'Asistan'}: {m['content']}"
-        for m in messages
-    ])
+    if is_english:
+        conversation_text = "\n".join([
+            f"{'User' if m['role'] == 'user' else 'Assistant'}: {m['content']}"
+            for m in messages
+        ])
+        summary_prompt = SESSION_SUMMARY_PROMPT_EN
+        user_prompt = f"Summarize this session:\n\n{conversation_text}"
+    else:
+        conversation_text = "\n".join([
+            f"{'Kullanıcı' if m['role'] == 'user' else 'Asistan'}: {m['content']}"
+            for m in messages
+        ])
+        summary_prompt = SESSION_SUMMARY_PROMPT_TR
+        user_prompt = f"Şu seansı özetle:\n\n{conversation_text}"
     
     try:
         # Call OpenAI API for summary
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": SESSION_SUMMARY_PROMPT},
-                {"role": "user", "content": f"Şu seansı özetle:\n\n{conversation_text}"}
+                {"role": "system", "content": summary_prompt},
+                {"role": "user", "content": user_prompt}
             ],
             max_tokens=500,
             temperature=0.7
@@ -476,10 +680,11 @@ def summarize_session(conversation_id):
         
         summary_text = response.choices[0].message.content
         
-        # Extract the summary line for title (first line after "📝 Özet:")
-        title_match = summary_text.split("**📝 Özet:**")
+        # Extract the summary line for title
+        # Works for both "📝 Özet:" (Turkish) and "📝 Summary:" (English)
+        title_match = summary_text.split("**📝 Özet:**") if not is_english else summary_text.split("**📝 Summary:**")
         if len(title_match) > 1:
-            # Get the text after "Özet:" until the next section or newline
+            # Get the text after "Özet:/Summary:" until the next section or newline
             title_part = title_match[1].split("**🎯")[0].strip()
             # Clean up and limit length
             new_title = title_part.replace("\n", " ").strip()[:60]

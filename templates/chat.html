@@ -1570,7 +1570,7 @@
                     <h1>{{ bot.name }}</h1>
                     <div class="status">
                         <span class="status-dot"></span>
-                        <span>Çevrimiçi</span>
+                        <span>{{ bot.online | default("Çevrimiçi") }}</span>
                     </div>
                 </div>
                 <div class="therapy-timer" id="therapyTimer">
@@ -1597,16 +1597,16 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                     </svg>
-                    <span>Seni Tanıma Seviyesi</span>
+                    <span>{{ bot.xp_title | default("Seni Tanıma Seviyesi") }}</span>
                 </div>
-                <div class="xp-level" id="xpLevel">Seviye 1</div>
+                <div class="xp-level" id="xpLevel">{{ bot.xp_level | default("Seviye") }} 1</div>
             </div>
             <div class="xp-bar-container">
                 <div class="xp-bar" id="xpBar" style="width: 0%"></div>
             </div>
             <div class="xp-info">
                 <span id="xpCurrent">0 XP</span>
-                <span id="xpNext">Sonraki: 100 XP</span>
+                <span id="xpNext">{{ bot.xp_next | default("Sonraki") }}: 100 XP</span>
             </div>
         </div>
 
@@ -1615,7 +1615,7 @@
             <div class="xp-popup-content">
                 <div class="xp-popup-badge" id="xpPopupBadge">Uzun Mesaj</div>
                 <div class="xp-popup-amount" id="xpPopupAmount">+30 XP</div>
-                <div class="xp-popup-label">Teşekkürler, seni daha iyi tanıyorum!</div>
+                <div class="xp-popup-label">{{ bot.xp_thanks | default("Teşekkürler, seni daha iyi tanıyorum!") }}</div>
             </div>
         </div>
 
@@ -1624,7 +1624,7 @@
             <div class="level-up-modal" onclick="event.stopPropagation()">
                 <div class="level-up-icon">🎉</div>
                 <div class="level-up-title" id="levelUpTitle">Seviye 2!</div>
-                <div class="level-up-subtitle">Tebrikler!</div>
+                <div class="level-up-subtitle">{{ bot.level_up_congrats | default("Tebrikler!") }}</div>
                 <div class="level-up-message" id="levelUpMessage">Seninle olan bağımız güçleniyor. Artık seni daha iyi anlayabiliyorum.</div>
             </div>
         </div>
@@ -1667,59 +1667,59 @@
                                         <circle cx="12" cy="12" r="10"/>
                                         <path d="M12 6v6l4 2"/>
                                     </svg>
-                                    <span>Terapi Süresi Belirle</span>
+                                    <span>{{ bot.timer_set | default("Terapi Süresi Belirle") }}</span>
                                     <svg id="durationArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px; margin-left: auto; transition: transform 0.2s;">
                                         <path d="M6 9l6 6 6-6"/>
                                     </svg>
                                 </button>
                                 
-                                <!-- Süre Seçenekleri -->
+                                <!-- Duration Options -->
                                 <div class="duration-options" id="durationOptions">
                                     <button class="duration-option-btn" onclick="setTherapyDuration(1)">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <circle cx="12" cy="12" r="10"/>
                                             <path d="M12 6v6"/>
                                         </svg>
-                                        1 dakika
+                                        1 {{ bot.timer_minute | default("dakika") }}
                                     </button>
                                     <button class="duration-option-btn" onclick="setTherapyDuration(5)">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <circle cx="12" cy="12" r="10"/>
                                             <path d="M12 6v6l3 1.5"/>
                                         </svg>
-                                        5 dakika
+                                        5 {{ bot.timer_minutes | default("dakika") }}
                                     </button>
                                     <button class="duration-option-btn" onclick="setTherapyDuration(10)">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <circle cx="12" cy="12" r="10"/>
                                             <path d="M12 6v6l4 2"/>
                                         </svg>
-                                        10 dakika
+                                        10 {{ bot.timer_minutes | default("dakika") }}
                                     </button>
                                     <button class="duration-option-btn" onclick="toggleCustomDuration(event)">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
                                             <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
                                         </svg>
-                                        Kendiniz girin...
+                                        {{ bot.timer_custom | default("Kendiniz girin...") }}
                                     </button>
                                     <div class="custom-duration-row" id="customDurationRow">
                                         <input type="number" id="customMinutes" min="1" max="60" placeholder="5">
-                                        <span>dakika</span>
-                                        <button onclick="setCustomDuration()">Başlat</button>
+                                        <span>{{ bot.timer_minutes | default("dakika") }}</span>
+                                        <button onclick="setCustomDuration()">{{ bot.timer_start | default("Başlat") }}</button>
                                     </div>
                                 </div>
                                 
                                 <div class="actions-menu-divider"></div>
                                 
-                                <!-- Seansı Özetle -->
+                                <!-- Summarize Session -->
                                 <button class="actions-menu-item summary-item" onclick="handleSummarizeSession()">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
                                         <rect x="9" y="3" width="6" height="4" rx="1"/>
                                         <path d="M9 12h6M9 16h6"/>
                                     </svg>
-                                    <span>Seansı Bitir ve Özetle</span>
+                                    <span>{{ bot.summarize | default("Seansı Bitir ve Özetle") }}</span>
                                 </button>
                             </div>
                         </div>
@@ -1746,7 +1746,7 @@
     <div class="history-overlay" id="historyOverlay" onclick="closeHistory()">
         <div class="history-panel" onclick="event.stopPropagation()">
             <div class="history-header">
-                <h3>Sohbetler</h3>
+                <h3>{{ bot.chats | default("Sohbetler") }}</h3>
                 <button class="icon-btn" onclick="closeHistory()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M18 6L6 18M6 6l12 12"/>
@@ -1769,7 +1769,7 @@
                         <rect x="9" y="3" width="6" height="4" rx="1"/>
                         <path d="M9 12h6M9 16h6"/>
                     </svg>
-                    <span>Seans Özeti</span>
+                    <span>{{ bot.summary_title | default("Seans Özeti") }}</span>
                 </div>
                 <button class="summary-modal-close" onclick="closeSummaryModal()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1784,7 +1784,7 @@
                 </div>
             </div>
             <div class="summary-modal-actions">
-                <button class="summary-modal-btn" onclick="closeSummaryModal()">Tamam</button>
+                <button class="summary-modal-btn" onclick="closeSummaryModal()">{{ bot.summary_ok | default("Tamam") }}</button>
             </div>
         </div>
     </div>
@@ -1798,39 +1798,39 @@
             </div>
             
             <div class="emotion-modal-section">
-                <label class="emotion-modal-label">Şiddeti nasıl?</label>
+                <label class="emotion-modal-label">{{ bot.intensity_question | default("Şiddeti nasıl?") }}</label>
                 <div class="intensity-selector">
                     <button class="intensity-btn" onclick="selectIntensity(1)" data-intensity="1">
                         <span class="number">1</span>
-                        <span class="label">Hafif</span>
+                        <span class="label">{{ bot.intensity_1 | default("Hafif") }}</span>
                     </button>
                     <button class="intensity-btn" onclick="selectIntensity(2)" data-intensity="2">
                         <span class="number">2</span>
-                        <span class="label">Az</span>
+                        <span class="label">{{ bot.intensity_2 | default("Az") }}</span>
                     </button>
                     <button class="intensity-btn" onclick="selectIntensity(3)" data-intensity="3">
                         <span class="number">3</span>
-                        <span class="label">Orta</span>
+                        <span class="label">{{ bot.intensity_3 | default("Orta") }}</span>
                     </button>
                     <button class="intensity-btn" onclick="selectIntensity(4)" data-intensity="4">
                         <span class="number">4</span>
-                        <span class="label">Yoğun</span>
+                        <span class="label">{{ bot.intensity_4 | default("Yoğun") }}</span>
                     </button>
                     <button class="intensity-btn" onclick="selectIntensity(5)" data-intensity="5">
                         <span class="number">5</span>
-                        <span class="label">Çok</span>
+                        <span class="label">{{ bot.intensity_5 | default("Çok") }}</span>
                     </button>
                 </div>
             </div>
             
             <div class="emotion-modal-section">
-                <label class="emotion-modal-label">Eklemek istediğin bir şey var mı?</label>
-                <textarea class="extra-input" id="extraInput" placeholder="(İsteğe bağlı)"></textarea>
+                <label class="emotion-modal-label">{{ bot.add_note | default("Eklemek istediğin bir şey var mı?") }}</label>
+                <textarea class="extra-input" id="extraInput" placeholder="{{ bot.optional | default('(İsteğe bağlı)') }}"></textarea>
             </div>
             
             <div class="emotion-modal-actions">
-                <button class="modal-btn modal-btn-cancel" onclick="closeEmotionModal()">İptal</button>
-                <button class="modal-btn modal-btn-send" id="modalSendBtn" onclick="sendEmotionMessage()" disabled>Gönder</button>
+                <button class="modal-btn modal-btn-cancel" onclick="closeEmotionModal()">{{ bot.cancel | default("İptal") }}</button>
+                <button class="modal-btn modal-btn-send" id="modalSendBtn" onclick="sendEmotionMessage()" disabled>{{ bot.send | default("Gönder") }}</button>
             </div>
         </div>
     </div>
@@ -1848,7 +1848,44 @@
             noChats: '{{ bot.no_chats }}',
             today: '{{ bot.today }}',
             yesterday: '{{ bot.yesterday }}',
-            previous: '{{ bot.previous }}'
+            previous: '{{ bot.previous }}',
+            // UI Texts (with defaults for Turkish)
+            lang: '{{ bot.lang | default("tr") }}',
+            xpTitle: '{{ bot.xp_title | default("Seni Tanıma Seviyesi") }}',
+            xpLevel: '{{ bot.xp_level | default("Seviye") }}',
+            xpNext: '{{ bot.xp_next | default("Sonraki") }}',
+            xpMax: '{{ bot.xp_max | default("Maksimum Seviye!") }}',
+            timerSet: '{{ bot.timer_set | default("Terapi Süresi Belirle") }}',
+            timerMinute: '{{ bot.timer_minute | default("dakika") }}',
+            timerMinutes: '{{ bot.timer_minutes | default("dakika") }}',
+            timerCustom: '{{ bot.timer_custom | default("Kendiniz girin...") }}',
+            timerStart: '{{ bot.timer_start | default("Başlat") }}',
+            timerEnded: '{{ bot.timer_ended | default("Süre Doldu!") }}',
+            timerEndedMsg: '{{ bot.timer_ended_msg | default("Terapi süreniz tamamlandı. Kendinize ayırdığınız bu zaman için tebrikler!") }}',
+            summarize: '{{ bot.summarize | default("Seansı Bitir ve Özetle") }}',
+            summaryTitle: '{{ bot.summary_title | default("Seans Özeti") }}',
+            summaryLoading: '{{ bot.summary_loading | default("Seans özetleniyor...") }}',
+            summaryOk: '{{ bot.summary_ok | default("Tamam") }}',
+            online: '{{ bot.online | default("Çevrimiçi") }}',
+            chats: '{{ bot.chats | default("Sohbetler") }}',
+            deleteConfirm: '{{ bot.delete_confirm | default("Bu sohbeti silmek istediğinize emin misiniz?") }}',
+            connectionError: '{{ bot.connection_error | default("Bağlantı Hatası") }}',
+            connectionFailed: '{{ bot.connection_failed | default("Sunucuya bağlanılamadı.") }}',
+            intensityQuestion: '{{ bot.intensity_question | default("Şiddeti nasıl?") }}',
+            intensity1: '{{ bot.intensity_1 | default("Hafif") }}',
+            intensity2: '{{ bot.intensity_2 | default("Az") }}',
+            intensity3: '{{ bot.intensity_3 | default("Orta") }}',
+            intensity4: '{{ bot.intensity_4 | default("Yoğun") }}',
+            intensity5: '{{ bot.intensity_5 | default("Çok") }}',
+            addNote: '{{ bot.add_note | default("Eklemek istediğin bir şey var mı?") }}',
+            optional: '{{ bot.optional | default("(İsteğe bağlı)") }}',
+            cancel: '{{ bot.cancel | default("İptal") }}',
+            send: '{{ bot.send | default("Gönder") }}',
+            shortMsg: '{{ bot.short_msg | default("Kısa Mesaj") }}',
+            mediumMsg: '{{ bot.medium_msg | default("Orta Mesaj") }}',
+            longMsg: '{{ bot.long_msg | default("Uzun Mesaj") }}',
+            xpThanks: '{{ bot.xp_thanks | default("Teşekkürler, seni daha iyi tanıyorum!") }}',
+            levelUpCongrats: '{{ bot.level_up_congrats | default("Tebrikler!") }}'
         };
 
         let sessionId = BOT.id + '_' + Math.random().toString(36).substr(2, 9);
@@ -1865,7 +1902,7 @@
             mediumXP: 15,
             longXP: 30,
             levelThresholds: [0, 100, 250, 500, 850, 1300, 1850, 2500, 3250, 4100, 5000],
-            levelMessages: [
+            levelMessages: {{ bot.level_messages | default([
                 "Yeni bir yolculuğa başladık!",
                 "Seninle olan bağımız güçleniyor. Artık seni daha iyi anlayabiliyorum.",
                 "Paylaştıkların bana çok şey öğretiyor. Teşekkürler!",
@@ -1876,7 +1913,7 @@
                 "Bu seviyeye ulaşan çok az kişi var. Tebrikler!",
                 "Seninle olan yolculuğumuz muhteşem!",
                 "Maksimum bağlantı! Artık seni çok iyi tanıyorum."
-            ]
+            ]) | tojson }}
         };
 
         let userXP = 0;
@@ -1928,11 +1965,11 @@
         function getXPForMessage(message) {
             const length = message.trim().length;
             if (length < XP_CONFIG.shortMessageThreshold) {
-                return { xp: XP_CONFIG.shortXP, type: 'Kısa Mesaj', emoji: '💬' };
+                return { xp: XP_CONFIG.shortXP, type: BOT.shortMsg, emoji: '💬' };
             } else if (length < XP_CONFIG.mediumMessageThreshold) {
-                return { xp: XP_CONFIG.mediumXP, type: 'Orta Mesaj', emoji: '📝' };
+                return { xp: XP_CONFIG.mediumXP, type: BOT.mediumMsg, emoji: '📝' };
             } else {
-                return { xp: XP_CONFIG.longXP, type: 'Uzun Mesaj', emoji: '📖' };
+                return { xp: XP_CONFIG.longXP, type: BOT.longMsg, emoji: '📖' };
             }
         }
 
@@ -1971,11 +2008,11 @@
             const percentage = Math.min((progressInLevel / xpNeededForLevel) * 100, 100);
             
             xpBar.style.width = percentage + '%';
-            xpLevel.textContent = 'Seviye ' + userLevel;
+            xpLevel.textContent = BOT.xpLevel + ' ' + userLevel;
             xpCurrent.textContent = userXP + ' XP';
             xpNext.textContent = userLevel >= XP_CONFIG.levelThresholds.length 
-                ? 'Maksimum Seviye!' 
-                : 'Sonraki: ' + nextLevelXP + ' XP';
+                ? BOT.xpMax 
+                : BOT.xpNext + ': ' + nextLevelXP + ' XP';
         }
 
         function showXPPopup(xpGain) {
@@ -2004,8 +2041,8 @@
             
             if (!overlay) return;
             
-            title.textContent = 'Seviye ' + level + '!';
-            message.textContent = XP_CONFIG.levelMessages[level - 1] || 'Tebrikler!';
+            title.textContent = BOT.xpLevel + ' ' + level + '!';
+            message.textContent = XP_CONFIG.levelMessages[level - 1] || BOT.levelUpCongrats;
             
             overlay.classList.add('show');
             
@@ -2106,8 +2143,8 @@
             if (!overlay) return;
             
             if (icon) icon.textContent = '⏰';
-            if (title) title.textContent = 'Süre Doldu!';
-            if (message) message.textContent = 'Terapi süreniz tamamlandı. Kendinize ayırdığınız bu zaman için tebrikler! İsterseniz "Seansı Bitir ve Özetle" ile özetinizi alabilirsiniz.';
+            if (title) title.textContent = BOT.timerEnded;
+            if (message) message.textContent = BOT.timerEndedMsg;
             
             overlay.classList.add('show');
             
@@ -2253,7 +2290,7 @@
             document.getElementById('summaryContent').innerHTML = `
                 <div class="summary-loading">
                     <div class="spinner"></div>
-                    <span>Seans özetleniyor...</span>
+                    <span>${BOT.summaryLoading}</span>
                 </div>
             `;
             
@@ -2284,8 +2321,8 @@
             } catch (e) {
                 document.getElementById('summaryContent').innerHTML = `
                     <div class="summary-error">
-                        <strong>⚠️ Bağlantı Hatası</strong><br>
-                        Sunucuya bağlanılamadı.
+                        <strong>⚠️ ${BOT.connectionError}</strong><br>
+                        ${BOT.connectionFailed}
                     </div>
                 `;
             }
@@ -2414,7 +2451,7 @@
         }
 
         async function deleteConversation(id) {
-            if (!confirm('Bu sohbeti silmek istediğinize emin misiniz?')) return;
+            if (!confirm(BOT.deleteConfirm)) return;
 
             try {
                 await fetch(`/api/conversations/${id}`, { method: 'DELETE' });
@@ -2586,8 +2623,8 @@
                 stopTimer();
                 typing.remove();
                 addError({
-                    error: 'Bağlantı Hatası',
-                    details: 'Sunucuya bağlanılamadı.'
+                    error: BOT.connectionError,
+                    details: BOT.connectionFailed
                 });
             }
 
