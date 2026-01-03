@@ -107,6 +107,29 @@ CHATBOTS = {
         'previous': 'Önceki',
         'no_chats': 'Henüz sohbet yok',
         'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
+    },
+    'eda': {
+        'id': 'eda',
+        'name': 'Eda için Asistan',
+        'short_name': 'Asistan',
+        'icon': '🧡',
+        'prompt_id': 'pmpt_695958416b2081978b087eb082a52f6e031bfc22cd5d10b0',
+        'prompt_version': '3',
+        'accent_color': '#f97316',  # Orange
+        'welcome_title': 'Merhaba Eda! 👋',
+        'welcome_text': 'Bugün sana nasıl yardımcı olabilirim? İstediğin her konuda yanındayım.',
+        'suggestions': [
+            'Bugün nasıl hissediyorum anlatayım',
+            'Bir konuda tavsiye almak istiyorum',
+            'Sadece sohbet edelim'
+        ],
+        'input_placeholder': 'Mesajını yaz...',
+        'new_chat': 'Yeni Sohbet',
+        'today': 'Bugün',
+        'yesterday': 'Dün',
+        'previous': 'Önceki',
+        'no_chats': 'Henüz sohbet yok',
+        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
     }
 }
 
@@ -131,6 +154,11 @@ def cihan_chat():
 def melike_chat():
     """Melike-AI chat page."""
     return render_template('chat.html', bot=CHATBOTS['melike'])
+
+@app.route('/eda')
+def eda_chat():
+    """Eda-AI chat page."""
+    return render_template('chat.html', bot=CHATBOTS['eda'])
 
 # ============== Chat API ==============
 
