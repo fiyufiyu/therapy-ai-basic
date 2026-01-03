@@ -309,29 +309,39 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-top: 4px;
-            font-size: 11px;
-            color: var(--text-muted);
+            margin-top: 6px;
         }
 
         .message.user .message-meta {
             justify-content: flex-end;
-            color: rgba(255,255,255,0.7);
+        }
+
+        .timestamp {
+            font-size: 11px;
+            color: #5a7a8a;
+            background: linear-gradient(135deg, #e8f4f8 0%, #dceef4 100%);
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            border: 1px solid #c5dde6;
+        }
+
+        .message.user .timestamp {
+            color: #7a5a8a;
+            background: linear-gradient(135deg, #f4e8f8 0%, #efdcf4 100%);
+            border-color: #ddc5e6;
         }
 
         .response-time {
-            padding: 2px 6px;
-            background: var(--accent-soft);
-            border-radius: var(--radius-sm);
-            font-size: 10px;
+            padding: 4px 10px;
+            background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent-medium) 100%);
+            border-radius: var(--radius-full);
+            font-size: 11px;
             color: var(--accent);
-            font-weight: 500;
+            font-weight: 600;
+            border: 1px solid var(--accent)40;
         }
 
-        .message.user .response-time {
-            background: rgba(255,255,255,0.2);
-            color: white;
-        }
 
         /* Markdown Styles */
         .message-bubble p {
@@ -923,7 +933,7 @@
                 content.innerHTML = '<div class="messages" id="messages"></div>';
 
                 data.messages.forEach(m => {
-                    addMessage(m.content, m.role, m.response_time);
+                    addMessage(m.content, m.role, m.response_time, m.created_at);
                 });
 
                 renderHistory();
@@ -1101,7 +1111,14 @@
             updateSendButton();
         }
 
-        function addMessage(content, role, responseTime = null) {
+        function formatTimestamp(dateStr) {
+            const date = dateStr ? new Date(dateStr) : new Date();
+            const hours = date.getHours().toString().padStart(2, '0');
+            const mins = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${mins}`;
+        }
+
+        function addMessage(content, role, responseTime = null, createdAt = null) {
             let messages = document.getElementById('messages');
             if (!messages) {
                 const content = document.getElementById('chatContent');
@@ -1116,8 +1133,9 @@
             
             const avatar = role === 'user' ? '👤' : BOT.icon;
             const formattedContent = role === 'assistant' ? parseMarkdown(content) : escapeHtml(content);
+            const timestamp = formatTimestamp(createdAt);
             
-            const timeBadge = (role === 'assistant' && responseTime > 0)
+            const responseBadge = (role === 'assistant' && responseTime > 0)
                 ? `<span class="response-time">${formatTime(responseTime)}</span>`
                 : '';
             
@@ -1125,7 +1143,10 @@
                 <div class="message-avatar">${avatar}</div>
                 <div>
                     <div class="message-bubble">${formattedContent}</div>
-                    ${timeBadge ? `<div class="message-meta">${timeBadge}</div>` : ''}
+                    <div class="message-meta">
+                        <span class="timestamp">${timestamp}</span>
+                        ${responseBadge}
+                    </div>
                 </div>
             `;
             
