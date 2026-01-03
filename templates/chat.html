@@ -1,30 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{{ bot.name }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #f8f9fa;
-            --bg-chat: #ffffff;
-            --bg-sidebar: #f0f2f5;
-            --bg-user-msg: #e8f4ec;
-            --bg-bot-msg: #ffffff;
+            --bg-primary: #faf9f7;
+            --bg-secondary: #f5f3f0;
+            --bg-card: #ffffff;
             --accent: {{ bot.accent_color }};
-            --accent-hover: {{ bot.accent_color }}dd;
-            --text-primary: #1a1a1a;
-            --text-secondary: #5f6368;
-            --text-muted: #9aa0a6;
-            --border: #e5e7eb;
-            --border-light: #f0f0f0;
-            --shadow: rgba(0, 0, 0, 0.08);
-            --error-bg: #fef2f2;
-            --error-border: #fecaca;
-            --error-text: #dc2626;
+            --accent-soft: {{ bot.accent_color }}15;
+            --accent-medium: {{ bot.accent_color }}30;
+            --text-primary: #2d2a26;
+            --text-secondary: #6b6560;
+            --text-muted: #9c9690;
+            --border: #e8e5e1;
+            --border-soft: #f0ede9;
+            --shadow-sm: 0 1px 2px rgba(45, 42, 38, 0.04);
+            --shadow-md: 0 4px 12px rgba(45, 42, 38, 0.08);
+            --shadow-lg: 0 8px 24px rgba(45, 42, 38, 0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
         }
 
         * {
@@ -39,600 +41,483 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-main);
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Main Layout */
-        .app-container {
-            display: flex;
-            height: 100vh;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 260px;
-            background: var(--bg-sidebar);
-            border-right: 1px solid var(--border);
+        /* App Layout */
+        .app {
             display: flex;
             flex-direction: column;
+            height: 100vh;
+            height: 100dvh;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-soft);
             flex-shrink: 0;
         }
 
-        .sidebar-header {
-            padding: 16px;
-            border-bottom: 1px solid var(--border);
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .new-chat-btn {
-            width: 100%;
-            padding: 12px 16px;
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent)cc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-info h1 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .header-info .status {
+            font-size: 12px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
             background: var(--accent);
-            color: white;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            background: var(--bg-secondary);
             border: none;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            transition: background 0.2s;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
         }
 
-        .new-chat-btn:hover {
-            background: var(--accent-hover);
+        .icon-btn:hover {
+            background: var(--border);
+            color: var(--text-primary);
         }
 
-        .new-chat-btn svg {
+        .icon-btn:active {
+            transform: scale(0.95);
+        }
+
+        .icon-btn svg {
             width: 18px;
             height: 18px;
         }
 
-        .sidebar-content {
-            flex: 1;
-            padding: 12px;
-            overflow-y: auto;
-        }
-
-        .sidebar-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 8px 8px 12px;
-        }
-
-        /* Chat History Items */
-        .chat-history {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .chat-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.15s;
-            position: relative;
-        }
-
-        .chat-item:hover {
-            background: var(--border);
-        }
-
-        .chat-item.active {
-            background: var(--bg-chat);
-            border: 1px solid var(--border);
-        }
-
-        .chat-item-icon {
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: var(--text-muted);
-        }
-
-        .chat-item-icon svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .chat-item-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .chat-item-title {
-            font-size: 13px;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .chat-item-date {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .chat-item-delete {
-            opacity: 0;
-            background: none;
-            border: none;
-            padding: 4px;
-            cursor: pointer;
-            color: var(--text-muted);
-            border-radius: 4px;
-            transition: all 0.15s;
-        }
-
-        .chat-item:hover .chat-item-delete {
-            opacity: 1;
-        }
-
-        .chat-item-delete:hover {
-            background: var(--error-bg);
-            color: var(--error-text);
-        }
-
-        .chat-item-delete svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .no-chats {
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-
-        .sidebar-footer {
-            padding: 16px;
-            border-top: 1px solid var(--border);
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .brand-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent) 0%, #0d8a6a 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .brand-text {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        /* Main Chat Area */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            background: var(--bg-chat);
-        }
-
-        /* Chat Container */
-        .chat-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        /* Messages Area */
-        .messages-wrapper {
+        /* Chat Area */
+        .chat-area {
             flex: 1;
             overflow-y: auto;
+            overflow-x: hidden;
             scroll-behavior: smooth;
+            background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-primary) 100%);
         }
 
-        .messages {
-            max-width: 768px;
-            margin: 0 auto;
-            padding: 24px 16px;
+        .chat-content {
+            padding: 16px;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Welcome Screen */
         .welcome {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 60vh;
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
+            animation: fadeUp 0.5s ease;
         }
 
-        .welcome-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--accent) 0%, #0d8a6a 100%);
-            border-radius: 16px;
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent)aa 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            margin-bottom: 20px;
+            font-size: 32px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-md);
         }
 
-        .welcome h1 {
-            font-size: 24px;
+        .welcome h2 {
+            font-size: 22px;
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--text-primary);
         }
 
         .welcome p {
+            font-size: 14px;
             color: var(--text-secondary);
-            font-size: 15px;
-            max-width: 400px;
+            max-width: 300px;
             line-height: 1.5;
+            margin-bottom: 24px;
         }
 
         .suggestions {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 8px;
-            justify-content: center;
-            margin-top: 32px;
-            max-width: 500px;
+            width: 100%;
+            max-width: 320px;
         }
 
-        .suggestion {
-            padding: 10px 16px;
-            background: var(--bg-main);
+        .suggestion-btn {
+            padding: 12px 16px;
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 20px;
+            border-radius: var(--radius-full);
             color: var(--text-secondary);
             font-family: inherit;
             font-size: 13px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            text-align: left;
         }
 
-        .suggestion:hover {
+        .suggestion-btn:hover {
             border-color: var(--accent);
             color: var(--accent);
-            background: white;
+            background: var(--accent-soft);
+            transform: translateX(4px);
         }
 
-        /* Message Styles */
+        .suggestion-btn:active {
+            transform: translateX(4px) scale(0.98);
+        }
+
+        /* Messages */
+        .messages {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
         .message {
             display: flex;
-            gap: 12px;
-            padding: 16px 0;
-            animation: fadeIn 0.3s ease;
+            gap: 10px;
+            animation: messageIn 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+        @keyframes messageIn {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .message + .message {
-            border-top: 1px solid var(--border-light);
+        .message.user {
+            flex-direction: row-reverse;
         }
 
         .message-avatar {
             width: 32px;
             height: 32px;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
             font-size: 14px;
-        }
-
-        .message.user .message-avatar {
-            background: var(--bg-user-msg);
-            color: var(--accent);
+            flex-shrink: 0;
         }
 
         .message.assistant .message-avatar {
-            background: linear-gradient(135deg, var(--accent) 0%, #0d8a6a 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent)cc 100%);
         }
 
-        .message-body {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .message-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-        }
-
-        .message-author {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .message-time {
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 400;
-            background: var(--bg-main);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        .message-content {
-            font-size: 15px;
-            line-height: 1.6;
-            color: var(--text-primary);
-            word-wrap: break-word;
-        }
-
-        /* Markdown Styles */
-        .message-content p {
-            margin: 0 0 12px 0;
-        }
-
-        .message-content p:last-child {
-            margin-bottom: 0;
-        }
-
-        .message-content strong {
-            font-weight: 600;
-        }
-
-        .message-content em {
-            font-style: italic;
-        }
-
-        .message-content code {
-            background: var(--bg-main);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'SF Mono', 'Consolas', monospace;
-            font-size: 13px;
-            color: var(--accent-hover);
-        }
-
-        .message-content pre {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 16px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 12px 0;
-            font-family: 'SF Mono', 'Consolas', monospace;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .message-content pre code {
-            background: transparent;
-            padding: 0;
-            color: inherit;
-            font-size: inherit;
-        }
-
-        .message-content ul, .message-content ol {
-            margin: 12px 0;
-            padding-left: 24px;
-        }
-
-        .message-content li {
-            margin: 6px 0;
-        }
-
-        .message-content blockquote {
-            border-left: 3px solid var(--accent);
-            margin: 12px 0;
-            padding: 8px 16px;
-            background: var(--bg-main);
-            border-radius: 0 8px 8px 0;
+        .message.user .message-avatar {
+            background: var(--bg-secondary);
             color: var(--text-secondary);
         }
 
-        .message-content h1, .message-content h2, .message-content h3 {
-            margin: 16px 0 8px 0;
+        .message-bubble {
+            max-width: 85%;
+            padding: 12px 14px;
+            border-radius: var(--radius-lg);
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .message.assistant .message-bubble {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 4px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .message.user .message-bubble {
+            background: var(--accent);
+            color: white;
+            border-radius: var(--radius-lg) var(--radius-lg) 4px var(--radius-lg);
+        }
+
+        .message-meta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .message.user .message-meta {
+            justify-content: flex-end;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .response-time {
+            padding: 2px 6px;
+            background: var(--accent-soft);
+            border-radius: var(--radius-sm);
+            font-size: 10px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .message.user .response-time {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        /* Markdown Styles */
+        .message-bubble p {
+            margin: 0 0 8px 0;
+        }
+
+        .message-bubble p:last-child {
+            margin-bottom: 0;
+        }
+
+        .message-bubble strong {
             font-weight: 600;
         }
 
-        .message-content h1 { font-size: 1.4em; }
-        .message-content h2 { font-size: 1.2em; }
-        .message-content h3 { font-size: 1.1em; }
-
-        .message-content a {
-            color: var(--accent);
-            text-decoration: none;
+        .message-bubble em {
+            font-style: italic;
         }
 
-        .message-content a:hover {
-            text-decoration: underline;
+        .message-bubble code {
+            background: var(--bg-secondary);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'SF Mono', monospace;
+            font-size: 12px;
         }
 
-        .message-content hr {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin: 16px 0;
+        .message-bubble pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            overflow-x: auto;
+            margin: 8px 0;
+            font-size: 12px;
+        }
+
+        .message-bubble pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        .message-bubble ul, .message-bubble ol {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .message-bubble li {
+            margin: 4px 0;
+        }
+
+        .message-bubble blockquote {
+            border-left: 3px solid var(--accent);
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: var(--accent-soft);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-style: italic;
+            color: var(--text-secondary);
         }
 
         /* Typing Indicator */
-        .typing-container {
+        .typing {
+            display: flex;
+            gap: 10px;
+            animation: messageIn 0.3s ease;
+        }
+
+        .typing-bubble {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            padding: 14px 16px;
+            border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 4px;
             display: flex;
             align-items: center;
             gap: 12px;
+            box-shadow: var(--shadow-sm);
         }
 
-        .typing-indicator {
+        .typing-dots {
             display: flex;
             gap: 4px;
-            padding: 8px 0;
         }
 
-        .response-timer {
-            font-size: 12px;
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: bounce 1.4s ease-in-out infinite;
+        }
+
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-4px); }
+        }
+
+        .typing-timer {
+            font-size: 11px;
             color: var(--text-muted);
             font-variant-numeric: tabular-nums;
         }
 
-        .typing-indicator span {
-            width: 8px;
-            height: 8px;
-            background: var(--text-muted);
-            border-radius: 50%;
-            animation: typing 1.4s ease-in-out infinite;
-        }
-
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-            30% { transform: translateY(-4px); opacity: 1; }
-        }
-
         /* Error Message */
-        .message.error .message-avatar {
-            background: var(--error-bg);
-            color: var(--error-text);
+        .message.error .message-bubble {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
         }
 
-        .error-box {
-            background: var(--error-bg);
-            border: 1px solid var(--error-border);
-            border-radius: 8px;
-            padding: 12px;
-            margin-top: 8px;
-        }
-
-        .error-type {
-            display: inline-block;
-            padding: 2px 8px;
-            background: var(--error-border);
-            border-radius: 4px;
-            font-size: 11px;
+        .error-header {
             font-weight: 600;
-            color: var(--error-text);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .error-details {
             font-size: 13px;
-            color: var(--error-text);
             line-height: 1.5;
-        }
-
-        .error-raw-toggle {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 12px;
-            cursor: pointer;
-            padding: 4px 0;
-            margin-top: 8px;
-            text-decoration: underline;
-        }
-
-        .error-raw {
-            margin-top: 8px;
-            padding: 8px;
-            background: white;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 11px;
-            color: var(--text-secondary);
-            word-break: break-all;
-            max-height: 80px;
-            overflow-y: auto;
         }
 
         /* Input Area */
         .input-area {
-            border-top: 1px solid var(--border);
-            background: var(--bg-chat);
-            padding: 16px;
+            padding: 12px 16px 16px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-soft);
+            flex-shrink: 0;
         }
 
         .input-container {
-            max-width: 768px;
-            margin: 0 auto;
-        }
-
-        .input-box {
             display: flex;
             align-items: flex-end;
-            gap: 8px;
-            background: var(--bg-main);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            gap: 10px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
             padding: 8px 12px;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
         }
 
-        .input-box:focus-within {
+        .input-container:focus-within {
+            background: var(--bg-card);
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
+            box-shadow: 0 0 0 3px var(--accent-soft);
         }
 
-        textarea {
+        .input-container textarea {
             flex: 1;
-            background: transparent;
             border: none;
-            outline: none;
+            background: transparent;
             font-family: inherit;
             font-size: 15px;
             color: var(--text-primary);
             resize: none;
-            max-height: 120px;
-            line-height: 1.5;
-            padding: 6px 0;
+            outline: none;
+            max-height: 100px;
+            line-height: 1.4;
+            padding: 4px 0;
         }
 
-        textarea::placeholder {
+        .input-container textarea::placeholder {
             color: var(--text-muted);
         }
 
         .send-btn {
             width: 36px;
             height: 36px;
-            border-radius: 8px;
+            border-radius: var(--radius-md);
             background: var(--accent);
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s, transform 0.1s;
+            transition: all 0.2s ease;
             flex-shrink: 0;
         }
 
         .send-btn:hover:not(:disabled) {
-            background: var(--accent-hover);
+            filter: brightness(1.1);
+            transform: scale(1.05);
         }
 
         .send-btn:active:not(:disabled) {
@@ -640,7 +525,7 @@
         }
 
         .send-btn:disabled {
-            background: var(--text-muted);
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
@@ -657,235 +542,281 @@
             margin-top: 8px;
         }
 
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
-            display: none;
-            width: 40px;
-            height: 40px;
-            background: transparent;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            cursor: pointer;
-            align-items: center;
-            justify-content: center;
+        /* History Panel */
+        .history-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
         }
 
-        .mobile-menu-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--text-secondary);
+        .history-overlay.show {
+            opacity: 1;
+            visibility: visible;
         }
 
-        /* Mobile Header */
-        .mobile-header {
-            display: none;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-            align-items: center;
-            justify-content: space-between;
-            background: var(--bg-chat);
-        }
-
-        .mobile-title {
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        /* Sidebar Overlay */
-        .sidebar-overlay {
-            display: none;
+        .history-panel {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 99;
+            width: 280px;
+            max-width: 85vw;
+            background: var(--bg-card);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 101;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .history-overlay.show .history-panel {
+            transform: translateX(0);
+        }
+
+        .history-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .history-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .history-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+        }
+
+        .history-section {
+            margin-bottom: 16px;
+        }
+
+        .history-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 8px 6px;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .history-item:hover {
+            background: var(--bg-secondary);
+        }
+
+        .history-item.active {
+            background: var(--accent-soft);
+        }
+
+        .history-item-icon {
+            color: var(--text-muted);
+        }
+
+        .history-item-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .history-item-text {
+            flex: 1;
+            font-size: 13px;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .history-item-delete {
+            opacity: 0;
+            padding: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            border-radius: 4px;
+        }
+
+        .history-item:hover .history-item-delete {
+            opacity: 1;
+        }
+
+        .history-item-delete:hover {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .history-item-delete svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .history-empty {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-muted);
+            font-size: 13px;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                left: -280px;
-                top: 0;
-                bottom: 0;
-                z-index: 100;
-                transition: left 0.3s ease;
+        @media (min-width: 800px) {
+            body {
+                padding: 20px;
+                background: linear-gradient(135deg, #f5f3f0 0%, #ebe8e4 100%);
             }
 
-            .sidebar.open {
-                left: 0;
+            .app {
+                border-radius: var(--radius-lg);
+                height: calc(100vh - 40px);
+                max-height: 900px;
             }
+        }
 
-            .sidebar-overlay.show {
-                display: block;
-            }
-
-            .mobile-header {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            .messages {
-                padding: 16px 12px;
-            }
-
-            .welcome {
-                padding: 24px 16px;
-                min-height: 50vh;
-            }
-
-            .welcome h1 {
+        @media (max-width: 480px) {
+            .welcome h2 {
                 font-size: 20px;
             }
 
             .welcome p {
+                font-size: 13px;
+            }
+
+            .message-bubble {
+                max-width: 90%;
                 font-size: 14px;
             }
 
-            .suggestions {
-                margin-top: 24px;
-            }
-
-            .suggestion {
-                font-size: 12px;
-                padding: 8px 12px;
-            }
-
-            .message {
-                padding: 12px 0;
-            }
-
-            .message-avatar {
-                width: 28px;
-                height: 28px;
-                font-size: 12px;
-            }
-
-            .message-content {
-                font-size: 14px;
-            }
-
-            .input-area {
-                padding: 12px;
-            }
-
-            textarea {
-                font-size: 16px; /* Prevents zoom on iOS */
+            .input-container textarea {
+                font-size: 16px; /* Prevents iOS zoom */
             }
         }
 
-        /* Scrollbar Styling */
-        .messages-wrapper::-webkit-scrollbar {
-            width: 6px;
+        /* Scrollbar */
+        .chat-area::-webkit-scrollbar {
+            width: 4px;
         }
 
-        .messages-wrapper::-webkit-scrollbar-track {
+        .chat-area::-webkit-scrollbar-track {
             background: transparent;
         }
 
-        .messages-wrapper::-webkit-scrollbar-thumb {
+        .chat-area::-webkit-scrollbar-thumb {
             background: var(--border);
-            border-radius: 3px;
+            border-radius: 2px;
         }
 
-        .messages-wrapper::-webkit-scrollbar-thumb:hover {
-            background: var(--text-muted);
+        .history-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .history-content::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 2px;
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Sidebar Overlay (Mobile) -->
-        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <button class="new-chat-btn" onclick="clearConversation()">
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="icon-btn" onclick="toggleHistory()" title="Geçmiş">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12h18M3 6h18M3 18h18"/>
+                    </svg>
+                </button>
+                <div class="avatar">{{ bot.icon }}</div>
+                <div class="header-info">
+                    <h1>{{ bot.name }}</h1>
+                    <div class="status">
+                        <span class="status-dot"></span>
+                        <span>Çevrimiçi</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" onclick="startNewChat()" title="Yeni Sohbet">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 5v14M5 12h14"/>
                     </svg>
-                    {{ bot.new_chat }}
                 </button>
             </div>
-            <div class="sidebar-content">
-                <div class="chat-history" id="chatHistory">
-                    <div class="no-chats">{{ bot.no_chats }}</div>
-                </div>
-            </div>
-            <div class="sidebar-footer">
-                <div class="brand">
-                    <div class="brand-icon">{{ bot.icon }}</div>
-                    <span class="brand-text">{{ bot.name }}</span>
-                </div>
-            </div>
-        </aside>
+        </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Mobile Header -->
-            <header class="mobile-header">
-                <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <!-- Chat Area -->
+        <div class="chat-area" id="chatArea">
+            <div class="chat-content" id="chatContent">
+                <!-- Welcome or Messages -->
+                <div class="welcome" id="welcome">
+                    <div class="welcome-avatar">{{ bot.icon }}</div>
+                    <h2>{{ bot.welcome_title }}</h2>
+                    <p>{{ bot.welcome_text }}</p>
+                    <div class="suggestions">
+                        {% for suggestion in bot.suggestions %}
+                        <button class="suggestion-btn" onclick="sendSuggestion('{{ suggestion }}')">{{ suggestion }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <div class="input-container">
+                <textarea 
+                    id="userInput" 
+                    placeholder="{{ bot.input_placeholder }}" 
+                    rows="1"
+                    onkeydown="handleKeyDown(event)"
+                    oninput="autoResize(this)"
+                ></textarea>
+                <button class="send-btn" id="sendBtn" onclick="sendMessage()">
                     <svg viewBox="0 0 24 24">
-                        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
                     </svg>
                 </button>
-                <span class="mobile-title">{{ bot.name }}</span>
-                <button class="mobile-menu-btn" onclick="clearConversation()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 5v14M5 12h14"/>
-                    </svg>
-                </button>
-            </header>
-
-            <!-- Chat Container -->
-            <div class="chat-container">
-                <div class="messages-wrapper" id="messagesWrapper">
-                    <div class="messages" id="messages">
-                        <div class="welcome" id="welcome">
-                            <div class="welcome-icon">{{ bot.icon }}</div>
-                            <h1>{{ bot.welcome_title }}</h1>
-                            <p>{{ bot.welcome_text }}</p>
-                            <div class="suggestions">
-                                {% for suggestion in bot.suggestions %}
-                                <button class="suggestion" onclick="sendSuggestion('{{ suggestion }}')">{{ suggestion }}</button>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Input Area -->
-                <div class="input-area">
-                    <div class="input-container">
-                        <div class="input-box">
-                            <textarea 
-                                id="userInput" 
-                                placeholder="{{ bot.input_placeholder }}" 
-                                rows="1"
-                                onkeydown="handleKeyDown(event)"
-                                oninput="autoResize(this)"
-                            ></textarea>
-                            <button class="send-btn" id="sendBtn" onclick="sendMessage()">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="input-hint">{{ bot.input_hint }}</div>
-                    </div>
-                </div>
             </div>
-        </main>
+            <div class="input-hint">{{ bot.input_hint }}</div>
+        </div>
+    </div>
+
+    <!-- History Panel -->
+    <div class="history-overlay" id="historyOverlay" onclick="closeHistory()">
+        <div class="history-panel" onclick="event.stopPropagation()">
+            <div class="history-header">
+                <h3>Sohbetler</h3>
+                <button class="icon-btn" onclick="closeHistory()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="history-content" id="historyContent">
+                <div class="history-empty">{{ bot.no_chats }}</div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Bot configuration from server
         const BOT = {
             id: '{{ bot.id }}',
             name: '{{ bot.name }}',
@@ -894,14 +825,10 @@
             welcomeTitle: '{{ bot.welcome_title }}',
             welcomeText: '{{ bot.welcome_text }}',
             suggestions: {{ bot.suggestions | tojson }},
-            // Turkish text
-            newChat: '{{ bot.new_chat }}',
+            noChats: '{{ bot.no_chats }}',
             today: '{{ bot.today }}',
             yesterday: '{{ bot.yesterday }}',
-            previous: '{{ bot.previous }}',
-            noChats: '{{ bot.no_chats }}',
-            inputPlaceholder: '{{ bot.input_placeholder }}',
-            inputHint: '{{ bot.input_hint }}'
+            previous: '{{ bot.previous }}'
         };
 
         let sessionId = BOT.id + '_' + Math.random().toString(36).substr(2, 9);
@@ -910,80 +837,71 @@
         let timerStartTime = null;
         let conversations = [];
 
-        // ============== Chat History Functions ==============
-        
-        async function loadChatHistory() {
+        // History Functions
+        async function loadHistory() {
             try {
                 const response = await fetch(`/api/conversations?bot_id=${BOT.id}`);
                 conversations = await response.json();
-                renderChatHistory();
-            } catch (error) {
-                console.error('Failed to load chat history:', error);
+                renderHistory();
+            } catch (e) {
+                console.error('Failed to load history:', e);
             }
         }
 
-        function renderChatHistory() {
-            const container = document.getElementById('chatHistory');
+        function renderHistory() {
+            const container = document.getElementById('historyContent');
             
             if (conversations.length === 0) {
-                container.innerHTML = `<div class="no-chats">${BOT.noChats}</div>`;
+                container.innerHTML = `<div class="history-empty">${BOT.noChats}</div>`;
                 return;
             }
 
-            // Group conversations by date
             const today = new Date().toDateString();
             const yesterday = new Date(Date.now() - 86400000).toDateString();
             
-            const grouped = {
-                today: [],
-                yesterday: [],
-                older: []
-            };
+            const grouped = { today: [], yesterday: [], older: [] };
 
-            conversations.forEach(conv => {
-                const convDate = new Date(conv.updated_at).toDateString();
-                if (convDate === today) {
-                    grouped.today.push(conv);
-                } else if (convDate === yesterday) {
-                    grouped.yesterday.push(conv);
-                } else {
-                    grouped.older.push(conv);
-                }
+            conversations.forEach(c => {
+                const d = new Date(c.updated_at).toDateString();
+                if (d === today) grouped.today.push(c);
+                else if (d === yesterday) grouped.yesterday.push(c);
+                else grouped.older.push(c);
             });
 
             let html = '';
 
-            if (grouped.today.length > 0) {
-                html += `<div class="sidebar-label">${BOT.today}</div>`;
-                html += grouped.today.map(conv => renderChatItem(conv)).join('');
+            if (grouped.today.length) {
+                html += `<div class="history-section"><div class="history-label">${BOT.today}</div>`;
+                html += grouped.today.map(c => historyItem(c)).join('');
+                html += '</div>';
             }
 
-            if (grouped.yesterday.length > 0) {
-                html += `<div class="sidebar-label">${BOT.yesterday}</div>`;
-                html += grouped.yesterday.map(conv => renderChatItem(conv)).join('');
+            if (grouped.yesterday.length) {
+                html += `<div class="history-section"><div class="history-label">${BOT.yesterday}</div>`;
+                html += grouped.yesterday.map(c => historyItem(c)).join('');
+                html += '</div>';
             }
 
-            if (grouped.older.length > 0) {
-                html += `<div class="sidebar-label">${BOT.previous}</div>`;
-                html += grouped.older.map(conv => renderChatItem(conv)).join('');
+            if (grouped.older.length) {
+                html += `<div class="history-section"><div class="history-label">${BOT.previous}</div>`;
+                html += grouped.older.map(c => historyItem(c)).join('');
+                html += '</div>';
             }
 
             container.innerHTML = html;
         }
 
-        function renderChatItem(conv) {
-            const isActive = conv.id === sessionId ? 'active' : '';
+        function historyItem(c) {
+            const active = c.id === sessionId ? 'active' : '';
             return `
-                <div class="chat-item ${isActive}" onclick="loadConversation('${conv.id}')">
-                    <div class="chat-item-icon">
+                <div class="history-item ${active}" onclick="loadConversation('${c.id}')">
+                    <div class="history-item-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                         </svg>
                     </div>
-                    <div class="chat-item-content">
-                        <div class="chat-item-title">${escapeHtml(conv.title)}</div>
-                    </div>
-                    <button class="chat-item-delete" onclick="event.stopPropagation(); deleteConversation('${conv.id}')" title="Delete">
+                    <div class="history-item-text">${escapeHtml(c.title)}</div>
+                    <button class="history-item-delete" onclick="event.stopPropagation(); deleteConversation('${c.id}')">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                         </svg>
@@ -992,220 +910,133 @@
             `;
         }
 
-        async function loadConversation(conversationId) {
+        async function loadConversation(id) {
             try {
-                const response = await fetch(`/api/conversations/${conversationId}`);
+                const response = await fetch(`/api/conversations/${id}`);
                 const data = await response.json();
                 
-                if (data.error) {
-                    console.error('Failed to load conversation:', data.error);
-                    return;
-                }
+                if (data.error) return;
 
-                sessionId = conversationId;
+                sessionId = id;
                 
-                // Clear current messages and show loaded conversation
-                const messagesDiv = document.getElementById('messages');
-                messagesDiv.innerHTML = '';
+                const content = document.getElementById('chatContent');
+                content.innerHTML = '<div class="messages" id="messages"></div>';
 
-                // Render all messages with response time
-                data.messages.forEach(msg => {
-                    addMessage(msg.content, msg.role, msg.response_time);
+                data.messages.forEach(m => {
+                    addMessage(m.content, m.role, m.response_time);
                 });
 
-                // Update sidebar to show active conversation
-                renderChatHistory();
-                
-                // Close sidebar on mobile
-                closeSidebarMobile();
-                
-            } catch (error) {
-                console.error('Failed to load conversation:', error);
+                renderHistory();
+                closeHistory();
+            } catch (e) {
+                console.error('Failed to load conversation:', e);
             }
         }
 
-        async function deleteConversation(conversationId) {
-            if (!confirm('Are you sure you want to delete this conversation?')) {
-                return;
-            }
+        async function deleteConversation(id) {
+            if (!confirm('Bu sohbeti silmek istediğinize emin misiniz?')) return;
 
             try {
-                await fetch(`/api/conversations/${conversationId}`, {
-                    method: 'DELETE'
-                });
+                await fetch(`/api/conversations/${id}`, { method: 'DELETE' });
                 
-                // If we deleted the current conversation, start a new one
-                if (conversationId === sessionId) {
-                    startNewChat();
-                }
-                
-                // Reload chat history
-                loadChatHistory();
-                
-            } catch (error) {
-                console.error('Failed to delete conversation:', error);
+                if (id === sessionId) startNewChat();
+                loadHistory();
+            } catch (e) {
+                console.error('Failed to delete:', e);
             }
         }
 
         function startNewChat() {
             sessionId = BOT.id + '_' + Math.random().toString(36).substr(2, 9);
             
-            // Reset UI
-            const messagesDiv = document.getElementById('messages');
-            messagesDiv.innerHTML = `
+            const content = document.getElementById('chatContent');
+            content.innerHTML = `
                 <div class="welcome" id="welcome">
-                    <div class="welcome-icon">${BOT.icon}</div>
-                    <h1>${BOT.welcomeTitle}</h1>
+                    <div class="welcome-avatar">${BOT.icon}</div>
+                    <h2>${BOT.welcomeTitle}</h2>
                     <p>${BOT.welcomeText}</p>
                     <div class="suggestions">
-                        ${BOT.suggestions.map(s => `<button class="suggestion" onclick="sendSuggestion('${s.replace(/'/g, "\\'")}')">${s}</button>`).join('')}
+                        ${BOT.suggestions.map(s => `<button class="suggestion-btn" onclick="sendSuggestion('${s.replace(/'/g, "\\'")}')">${s}</button>`).join('')}
                     </div>
                 </div>
             `;
 
-            renderChatHistory();
-            closeSidebarMobile();
+            renderHistory();
+            closeHistory();
         }
 
-        function closeSidebarMobile() {
-            if (window.innerWidth <= 768) {
-                const sidebar = document.getElementById('sidebar');
-                const overlay = document.getElementById('sidebarOverlay');
-                sidebar.classList.remove('open');
-                overlay.classList.remove('show');
-            }
+        function toggleHistory() {
+            document.getElementById('historyOverlay').classList.toggle('show');
         }
 
-        // Simple Markdown Parser
+        function closeHistory() {
+            document.getElementById('historyOverlay').classList.remove('show');
+        }
+
+        // Message Functions
         function parseMarkdown(text) {
             if (!text) return '';
             
-            let html = text;
-            
-            // Escape HTML first (but preserve line breaks for processing)
-            html = html
+            let html = text
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;');
             
-            // Code blocks (```code```)
-            html = html.replace(/```(\w*)\n?([\s\S]*?)```/g, (match, lang, code) => {
-                return `<pre><code class="language-${lang}">${code.trim()}</code></pre>`;
-            });
-            
-            // Inline code (`code`)
+            html = html.replace(/```(\w*)\n?([\s\S]*?)```/g, (m, lang, code) => 
+                `<pre><code>${code.trim()}</code></pre>`);
             html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-            
-            // Headers
             html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
             html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
             html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
-            
-            // Bold (**text** or __text__)
             html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-            html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
-            
-            // Italic (*text* or _text_)
             html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-            html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
-            
-            // Blockquotes
             html = html.replace(/^&gt; (.*$)/gm, '<blockquote>$1</blockquote>');
-            
-            // Unordered lists
             html = html.replace(/^\* (.*$)/gm, '<li>$1</li>');
             html = html.replace(/^- (.*$)/gm, '<li>$1</li>');
-            html = html.replace(/(<li>.*<\/li>)\n(?=<li>)/g, '$1');
             html = html.replace(/(<li>.*<\/li>)+/g, '<ul>$&</ul>');
-            
-            // Ordered lists
-            html = html.replace(/^\d+\. (.*$)/gm, '<oli>$1</oli>');
-            html = html.replace(/(<oli>.*<\/oli>)\n(?=<oli>)/g, '$1');
-            html = html.replace(/(<oli>.*<\/oli>)+/g, (match) => {
-                return '<ol>' + match.replace(/<\/?oli>/g, (tag) => tag.replace('oli', 'li')) + '</ol>';
-            });
-            
-            // Links [text](url)
-            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-            
-            // Horizontal rule
-            html = html.replace(/^---$/gm, '<hr>');
-            
-            // Paragraphs (double line breaks)
+            html = html.replace(/^\d+\. (.*$)/gm, '<li>$1</li>');
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
             html = html.replace(/\n\n/g, '</p><p>');
-            
-            // Single line breaks
             html = html.replace(/\n/g, '<br>');
             
-            // Wrap in paragraph if not already wrapped
-            if (!html.startsWith('<h') && !html.startsWith('<ul') && !html.startsWith('<ol') && !html.startsWith('<pre') && !html.startsWith('<blockquote')) {
-                html = '<p>' + html + '</p>';
-            }
-            
-            // Clean up empty paragraphs
+            if (!html.startsWith('<')) html = '<p>' + html + '</p>';
             html = html.replace(/<p><\/p>/g, '');
-            html = html.replace(/<p>(<h[123]>)/g, '$1');
-            html = html.replace(/(<\/h[123]>)<\/p>/g, '$1');
-            html = html.replace(/<p>(<ul>)/g, '$1');
-            html = html.replace(/(<\/ul>)<\/p>/g, '$1');
-            html = html.replace(/<p>(<ol>)/g, '$1');
-            html = html.replace(/(<\/ol>)<\/p>/g, '$1');
-            html = html.replace(/<p>(<pre>)/g, '$1');
-            html = html.replace(/(<\/pre>)<\/p>/g, '$1');
-            html = html.replace(/<p>(<blockquote>)/g, '$1');
-            html = html.replace(/(<\/blockquote>)<\/p>/g, '$1');
-            html = html.replace(/<p>(<hr>)<\/p>/g, '$1');
-            html = html.replace(/<p><br>/g, '<p>');
-            html = html.replace(/<br><\/p>/g, '</p>');
             
             return html;
         }
 
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            if (mins > 0) {
-                return `${mins}:${secs.toString().padStart(2, '0')}`;
-            }
-            return `${secs}s`;
+        function formatTime(s) {
+            const m = Math.floor(s / 60);
+            const sec = s % 60;
+            return m > 0 ? `${m}:${sec.toString().padStart(2, '0')}` : `${sec}s`;
         }
 
-        function startTimer(timerElement) {
+        function startTimer(el) {
             timerStartTime = Date.now();
             timerInterval = setInterval(() => {
                 const elapsed = Math.floor((Date.now() - timerStartTime) / 1000);
-                timerElement.textContent = formatTime(elapsed);
+                el.textContent = formatTime(elapsed);
             }, 1000);
         }
 
         function stopTimer() {
-            let elapsedSeconds = 0;
             if (timerInterval) {
                 clearInterval(timerInterval);
                 timerInterval = null;
             }
-            if (timerStartTime) {
-                elapsedSeconds = Math.floor((Date.now() - timerStartTime) / 1000);
-                timerStartTime = null;
-            }
-            return elapsedSeconds;
-        }
-
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('show');
+            const elapsed = timerStartTime ? Math.floor((Date.now() - timerStartTime) / 1000) : 0;
+            timerStartTime = null;
+            return elapsed;
         }
 
         function autoResize(textarea) {
             textarea.style.height = 'auto';
-            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+            textarea.style.height = Math.min(textarea.scrollHeight, 100) + 'px';
         }
 
-        function handleKeyDown(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
+        function handleKeyDown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
                 sendMessage();
             }
         }
@@ -1221,28 +1052,24 @@
             
             if (!message || isLoading) return;
 
-            // Hide welcome screen
             const welcome = document.getElementById('welcome');
             if (welcome) {
-                welcome.remove();
+                const content = document.getElementById('chatContent');
+                content.innerHTML = '<div class="messages" id="messages"></div>';
             }
 
-            // Add user message
             addMessage(message, 'user');
             input.value = '';
             input.style.height = 'auto';
 
-            // Show typing indicator
             isLoading = true;
             updateSendButton();
-            const typingDiv = showTypingIndicator();
+            const typing = showTyping();
 
             try {
                 const response = await fetch('/api/chat', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         message: message,
                         session_id: sessionId,
@@ -1253,24 +1080,20 @@
                 const data = await response.json();
                 
                 stopTimer();
-                typingDiv.remove();
+                typing.remove();
 
                 if (data.error) {
-                    addErrorMessage(data);
+                    addError(data);
                 } else {
-                    // Use response_time from server (more accurate)
                     addMessage(data.response, 'assistant', data.response_time);
-                    // Reload chat history to update sidebar
-                    loadChatHistory();
+                    loadHistory();
                 }
-            } catch (error) {
+            } catch (e) {
                 stopTimer();
-                typingDiv.remove();
-                addErrorMessage({
-                    error: 'Ağ Hatası',
-                    error_type: 'network_error',
-                    details: 'Sunucuya bağlanılamadı. Lütfen sunucunun çalıştığından emin olun.',
-                    raw_error: error.message
+                typing.remove();
+                addError({
+                    error: 'Bağlantı Hatası',
+                    details: 'Sunucuya bağlanılamadı.'
                 });
             }
 
@@ -1279,133 +1102,82 @@
         }
 
         function addMessage(content, role, responseTime = null) {
-            const messagesDiv = document.getElementById('messages');
-            const wrapper = document.getElementById('messagesWrapper');
+            let messages = document.getElementById('messages');
+            if (!messages) {
+                const content = document.getElementById('chatContent');
+                content.innerHTML = '<div class="messages" id="messages"></div>';
+                messages = document.getElementById('messages');
+            }
             
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${role}`;
+            const chatArea = document.getElementById('chatArea');
+            
+            const div = document.createElement('div');
+            div.className = `message ${role}`;
             
             const avatar = role === 'user' ? '👤' : BOT.icon;
-            const author = role === 'user' ? 'Sen' : BOT.shortName;
+            const formattedContent = role === 'assistant' ? parseMarkdown(content) : escapeHtml(content);
             
-            // Use markdown parsing for assistant messages, escape HTML for user messages
-            const formattedContent = role === 'assistant' 
-                ? parseMarkdown(content) 
-                : escapeHtml(content);
-            
-            // Show response time for assistant messages
-            const timeDisplay = (role === 'assistant' && responseTime !== null && responseTime > 0)
-                ? `<span class="message-time">${formatTime(responseTime)}</span>`
+            const timeBadge = (role === 'assistant' && responseTime > 0)
+                ? `<span class="response-time">${formatTime(responseTime)}</span>`
                 : '';
             
-            messageDiv.innerHTML = `
+            div.innerHTML = `
                 <div class="message-avatar">${avatar}</div>
-                <div class="message-body">
-                    <div class="message-header">
-                        <span class="message-author">${author}</span>
-                        ${timeDisplay}
-                    </div>
-                    <div class="message-content">${formattedContent}</div>
+                <div>
+                    <div class="message-bubble">${formattedContent}</div>
+                    ${timeBadge ? `<div class="message-meta">${timeBadge}</div>` : ''}
                 </div>
             `;
             
-            messagesDiv.appendChild(messageDiv);
-            wrapper.scrollTop = wrapper.scrollHeight;
+            messages.appendChild(div);
+            chatArea.scrollTop = chatArea.scrollHeight;
         }
 
-        function addErrorMessage(errorData) {
-            const messagesDiv = document.getElementById('messages');
-            const wrapper = document.getElementById('messagesWrapper');
+        function addError(data) {
+            const messages = document.getElementById('messages');
+            const chatArea = document.getElementById('chatArea');
             
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message assistant error';
+            const div = document.createElement('div');
+            div.className = 'message assistant error';
             
-            const errorTypeLabels = {
-                'auth_error': '🔑 Kimlik Doğrulama Hatası',
-                'rate_limit_error': '⏱️ İstek Limiti Aşıldı',
-                'connection_error': '🌐 Bağlantı Hatası',
-                'api_error': '⚠️ API Hatası',
-                'config_error': '⚙️ Yapılandırma Hatası',
-                'validation_error': '📝 Doğrulama Hatası',
-                'network_error': '📡 Ağ Hatası',
-                'unknown_error': '❓ Bilinmeyen Hata'
-            };
-
-            const errorLabel = errorTypeLabels[errorData.error_type] || '❌ Hata';
-            const uniqueId = 'error-' + Date.now();
-            
-            messageDiv.innerHTML = `
+            div.innerHTML = `
                 <div class="message-avatar">⚠️</div>
-                <div class="message-body">
-                    <div class="message-header">
-                        <span class="message-author">Sistem</span>
-                    </div>
-                    <div class="message-content">
-                        <strong>${escapeHtml(errorData.error)}</strong>
-                        <div class="error-box">
-                            <span class="error-type">${errorLabel}</span>
-                            <div class="error-details">${escapeHtml(errorData.details || 'Ek detay bulunmuyor.')}</div>
-                            ${errorData.raw_error ? `
-                                <button class="error-raw-toggle" onclick="toggleRawError('${uniqueId}')">Teknik detayları göster</button>
-                                <div id="${uniqueId}" class="error-raw" style="display: none;">${escapeHtml(errorData.raw_error)}</div>
-                            ` : ''}
-                        </div>
-                    </div>
+                <div class="message-bubble">
+                    <div class="error-header">⚠️ ${escapeHtml(data.error)}</div>
+                    <div class="error-details">${escapeHtml(data.details || 'Bir hata oluştu.')}</div>
                 </div>
             `;
             
-            messagesDiv.appendChild(messageDiv);
-            wrapper.scrollTop = wrapper.scrollHeight;
+            messages.appendChild(div);
+            chatArea.scrollTop = chatArea.scrollHeight;
         }
 
-        function toggleRawError(id) {
-            const el = document.getElementById(id);
-            const btn = el.previousElementSibling;
-            if (el.style.display === 'none') {
-                el.style.display = 'block';
-                btn.textContent = 'Teknik detayları gizle';
-            } else {
-                el.style.display = 'none';
-                btn.textContent = 'Teknik detayları göster';
-            }
-        }
-
-        function showTypingIndicator() {
-            const messagesDiv = document.getElementById('messages');
-            const wrapper = document.getElementById('messagesWrapper');
+        function showTyping() {
+            const messages = document.getElementById('messages');
+            const chatArea = document.getElementById('chatArea');
             
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message assistant';
-            typingDiv.innerHTML = `
-                <div class="message-avatar">${BOT.icon}</div>
-                <div class="message-body">
-                    <div class="message-header">
-                        <span class="message-author">${BOT.shortName}</span>
+            const div = document.createElement('div');
+            div.className = 'typing';
+            div.innerHTML = `
+                <div class="message-avatar" style="background: linear-gradient(135deg, var(--accent) 0%, var(--accent)cc 100%);">${BOT.icon}</div>
+                <div class="typing-bubble">
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
                     </div>
-                    <div class="typing-container">
-                        <div class="typing-indicator">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <span class="response-timer" id="responseTimer">0s</span>
-                    </div>
+                    <span class="typing-timer" id="typingTimer">0s</span>
                 </div>
             `;
             
-            messagesDiv.appendChild(typingDiv);
-            wrapper.scrollTop = wrapper.scrollHeight;
+            messages.appendChild(div);
+            chatArea.scrollTop = chatArea.scrollHeight;
             
-            // Start the timer
-            const timerElement = typingDiv.querySelector('#responseTimer');
-            startTimer(timerElement);
+            startTimer(div.querySelector('#typingTimer'));
             
-            return typingDiv;
+            return div;
         }
 
         function updateSendButton() {
-            const btn = document.getElementById('sendBtn');
-            btn.disabled = isLoading;
+            document.getElementById('sendBtn').disabled = isLoading;
         }
 
         function escapeHtml(text) {
@@ -1414,18 +1186,9 @@
             return div.innerHTML.replace(/\n/g, '<br>');
         }
 
-        async function clearConversation() {
-            // Simply start a new chat
-            startNewChat();
-        }
-
-        // ============== Initialization ==============
-        
-        // Load chat history on page load
+        // Init
         document.addEventListener('DOMContentLoaded', () => {
-            loadChatHistory();
-            
-            // Focus input on load (desktop only)
+            loadHistory();
             if (window.innerWidth > 768) {
                 document.getElementById('userInput').focus();
             }
