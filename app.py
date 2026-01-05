@@ -439,6 +439,86 @@ CHATBOTS = {
             "Maksimum bağlantı! Artık seni çok iyi tanıyorum."
         ]
     },
+    'ayse': {
+        'id': 'ayse',
+        'name': 'Symbiont',
+        'short_name': 'Symbiont',
+        'icon': '🧠',
+        'logo': '/static/logo-symbiont.png',
+        'prompt_id': 'pmpt_695b8348d4cc81909267fd3a9f8753950974e4fa9a1722fe',
+        'prompt_version': '2',
+        'accent_color': '#14b8a6',  # Teal
+        'welcome_title': 'Merhaba Ayse! 👋',
+        'welcome_text': 'Şu an baskın olan hangisi?',
+        'suggestions': [
+            {'display': '😰 Yükselen kaygı', 'message': 'Şu an yükselen bir kaygı hissediyorum.'},
+            {'display': '🌊 Panik dalgası', 'message': 'Bir panik dalgası geliyor gibi hissediyorum.'},
+            {'display': '🌀 Durmayan düşünceler', 'message': 'Düşüncelerim durmadan dönüyor.'},
+            {'display': '🛏️ Uyku kilidi', 'message': 'Uyku kilidi yaşıyorum, uyuyamıyorum.'},
+            {'display': '🎯 Odak dağınıklığı', 'message': 'Odak dağınıklığı yaşıyorum.'},
+            {'display': '⏰ Erteleme dürtüsü', 'message': 'Erteleme dürtüsü hissediyorum.'},
+            {'display': '🚧 Karar tıkanması', 'message': 'Karar vermekte zorlanıyorum, tıkandım.'},
+            {'display': '💨 İç sıkışma', 'message': 'İçimde bir sıkışma hissediyorum.'},
+            {'display': '🔥 Öfke patlaması', 'message': 'İçimde yükselen bir öfke var.'},
+            {'display': '🌑 Yalnızlık hissi', 'message': 'Kendimi yalnız hissediyorum.'}
+        ],
+        'input_placeholder': 'Mesajını yaz...',
+        'new_chat': 'Yeni Sohbet',
+        'today': 'Bugün',
+        'yesterday': 'Dün',
+        'previous': 'Önceki',
+        'no_chats': 'Henüz sohbet yok',
+        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter',
+        'lang': 'tr',
+        # Turkish UI texts
+        'xp_title': 'Seni Tanıma Seviyesi',
+        'xp_level': 'Seviye',
+        'xp_next': 'Sonraki',
+        'xp_max': 'Maksimum Seviye!',
+        'timer_set': 'Terapi Süresi Belirle',
+        'timer_minute': 'dakika',
+        'timer_minutes': 'dakika',
+        'timer_custom': 'Kendiniz girin...',
+        'timer_start': 'Başlat',
+        'timer_ended': 'Süre Doldu!',
+        'timer_ended_msg': 'Terapi süreniz tamamlandı. Kendinize ayırdığınız bu zaman için tebrikler! İsterseniz "Seansı Bitir ve Özetle" ile özetinizi alabilirsiniz.',
+        'summarize': 'Seansı Bitir ve Özetle',
+        'summary_title': 'Seans Özeti',
+        'summary_loading': 'Seans özetleniyor...',
+        'summary_ok': 'Tamam',
+        'online': 'Çevrimiçi',
+        'chats': 'Sohbetler',
+        'delete_confirm': 'Bu sohbeti silmek istediğinize emin misiniz?',
+        'connection_error': 'Bağlantı Hatası',
+        'connection_failed': 'Sunucuya bağlanılamadı.',
+        'intensity_question': 'Şiddeti nasıl?',
+        'intensity_1': 'Hafif',
+        'intensity_2': 'Az',
+        'intensity_3': 'Orta',
+        'intensity_4': 'Yoğun',
+        'intensity_5': 'Çok',
+        'add_note': 'Eklemek istediğin bir şey var mı?',
+        'optional': '(İsteğe bağlı)',
+        'cancel': 'İptal',
+        'send': 'Gönder',
+        'short_msg': 'Kısa Mesaj',
+        'medium_msg': 'Orta Mesaj',
+        'long_msg': 'Uzun Mesaj',
+        'xp_thanks': 'Teşekkürler, seni daha iyi tanıyorum!',
+        'level_up_congrats': 'Tebrikler!',
+        'level_messages': [
+            "Yeni bir yolculuğa başladık!",
+            "Seninle olan bağımız güçleniyor. Artık seni daha iyi anlayabiliyorum.",
+            "Paylaştıkların bana çok şey öğretiyor. Teşekkürler!",
+            "Seni tanımak güzel, derinleşiyoruz.",
+            "Birlikte güzel bir yol katetik. Seninle gurur duyuyorum!",
+            "Artık seni gerçekten tanıyorum. Bu özel bir bağ.",
+            "Senin için daha iyi bir rehber olabiliyorum artık.",
+            "Bu seviyeye ulaşan çok az kişi var. Tebrikler!",
+            "Seninle olan yolculuğumuz muhteşem!",
+            "Maksimum bağlantı! Artık seni çok iyi tanıyorum."
+        ]
+    },
     'warriorsofcompassion': {
         'id': 'warriorsofcompassion',
         'name': 'Symbiont',
@@ -562,6 +642,11 @@ def esma_chat():
 def busra_chat():
     """Busra-AI chat page."""
     return render_template('chat.html', bot=CHATBOTS['busra'])
+
+@app.route('/ayse')
+def ayse_chat():
+    """Ayse-AI chat page."""
+    return render_template('chat.html', bot=CHATBOTS['ayse'])
 
 @app.route('/warriorsofcompassion')
 def warriorsofcompassion_chat():
