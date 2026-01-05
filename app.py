@@ -366,7 +366,7 @@ CHATBOTS = {
         'icon': '🧠',
         'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_695b67fe852881958e5613fae2084f130034da24639361e6',
-        'prompt_version': '2',
+        'prompt_version': '4',
         'accent_color': '#ef4444',  # Red
         'welcome_title': 'Merhaba Busra! 👋',
         'welcome_text': 'Şu an baskın olan hangisi?',
