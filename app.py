@@ -598,6 +598,86 @@ CHATBOTS = {
             "Our journey together is amazing!",
             "Maximum connection! I know you very well now."
         ]
+    },
+    'heymendy': {
+        'id': 'heymendy',
+        'name': 'Symbiont',
+        'short_name': 'Symbiont',
+        'icon': '🧠',
+        'logo': '/static/logo-symbiont.png',
+        'prompt_id': 'pmpt_695e6e4fb35c819485b12d7f8df029cf024dac98e8918c4c',
+        'prompt_version': '2',
+        'accent_color': '#8b5cf6',  # Purple
+        'welcome_title': 'Hello! 👋',
+        'welcome_text': "What's dominating right now?",
+        'suggestions': [
+            {'display': '😰 Rising anxiety', 'message': "I'm feeling rising anxiety right now."},
+            {'display': '🌊 Panic wave', 'message': "I feel like a panic wave is coming."},
+            {'display': '🌀 Racing thoughts', 'message': "My thoughts keep racing non-stop."},
+            {'display': '🛏️ Sleep lock', 'message': "I'm experiencing sleep lock, can't fall asleep."},
+            {'display': '🎯 Focus scatter', 'message': "I'm experiencing scattered focus."},
+            {'display': '⏰ Procrastination urge', 'message': "I'm feeling the urge to procrastinate."},
+            {'display': '🚧 Decision block', 'message': "I'm struggling to make decisions, feeling stuck."},
+            {'display': '💨 Inner tension', 'message': "I'm feeling tension inside."},
+            {'display': '🔥 Anger surge', 'message': "I feel anger rising inside me."},
+            {'display': '🌑 Loneliness', 'message': "I'm feeling lonely."}
+        ],
+        'input_placeholder': 'Type your message...',
+        'new_chat': 'New Chat',
+        'today': 'Today',
+        'yesterday': 'Yesterday',
+        'previous': 'Previous',
+        'no_chats': 'No chats yet',
+        'input_hint': 'Press Enter to send, Shift+Enter for new line',
+        'lang': 'en',
+        # English UI texts
+        'xp_title': 'Understanding Level',
+        'xp_level': 'Level',
+        'xp_next': 'Next',
+        'xp_max': 'Maximum Level!',
+        'timer_set': 'Set Therapy Duration',
+        'timer_minute': 'minute',
+        'timer_minutes': 'minutes',
+        'timer_custom': 'Enter custom...',
+        'timer_start': 'Start',
+        'timer_ended': 'Time is up!',
+        'timer_ended_msg': 'Your therapy session is complete. Congratulations on taking this time for yourself! You can use "End & Summarize" to get your session summary.',
+        'summarize': 'End & Summarize Session',
+        'summary_title': 'Session Summary',
+        'summary_loading': 'Summarizing session...',
+        'summary_ok': 'OK',
+        'online': 'Online',
+        'chats': 'Chats',
+        'delete_confirm': 'Are you sure you want to delete this chat?',
+        'connection_error': 'Connection Error',
+        'connection_failed': 'Could not connect to server.',
+        'intensity_question': "How intense is it?",
+        'intensity_1': 'Very Mild',
+        'intensity_2': 'Mild',
+        'intensity_3': 'Moderate',
+        'intensity_4': 'Intense',
+        'intensity_5': 'Very Intense',
+        'add_note': 'Anything you want to add?',
+        'optional': '(Optional)',
+        'cancel': 'Cancel',
+        'send': 'Send',
+        'short_msg': 'Short Message',
+        'medium_msg': 'Medium Message',
+        'long_msg': 'Long Message',
+        'xp_thanks': 'Thanks, I understand you better!',
+        'level_up_congrats': 'Congratulations!',
+        'level_messages': [
+            "A new journey begins!",
+            "Our connection is growing stronger. I can understand you better now.",
+            "What you share teaches me a lot. Thank you!",
+            "Getting to know you is wonderful, we're going deeper.",
+            "We've come a long way together. I'm proud of you!",
+            "I truly know you now. This is a special bond.",
+            "I can be a better guide for you now.",
+            "Very few reach this level. Congratulations!",
+            "Our journey together is amazing!",
+            "Maximum connection! I know you very well now."
+        ]
     }
 }
 
@@ -652,6 +732,11 @@ def ayse_chat():
 def warriorsofcompassion_chat():
     """Warriors of Compassion English chat page."""
     return render_template('chat.html', bot=CHATBOTS['warriorsofcompassion'])
+
+@app.route('/heymendy')
+def heymendy_chat():
+    """Hey Mendy English chat page."""
+    return render_template('chat.html', bot=CHATBOTS['heymendy'])
 
 # ============== Chat API ==============
 
