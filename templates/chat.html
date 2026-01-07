@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="{{ bot.lang | default('tr') }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -1780,7 +1780,7 @@
             <div class="summary-content" id="summaryContent">
                 <div class="summary-loading">
                     <div class="spinner"></div>
-                    <span>Seans özetleniyor...</span>
+                    <span>{{ bot.summary_loading | default("Seans özetleniyor...") }}</span>
                 </div>
             </div>
             <div class="summary-modal-actions">
@@ -2231,13 +2231,25 @@
         function sendEmotionMessage() {
             if (!selectedIntensity) return;
             
-            const intensityLabels = {1: 'çok hafif', 2: 'hafif', 3: 'orta', 4: 'yoğun', 5: 'çok yoğun'};
+            // Language-aware intensity labels
+            const intensityLabels = BOT.lang === 'en' 
+                ? {1: 'very mild', 2: 'mild', 3: 'moderate', 4: 'intense', 5: 'very intense'}
+                : {1: 'çok hafif', 2: 'hafif', 3: 'orta', 4: 'yoğun', 5: 'çok yoğun'};
+            
             const extraText = document.getElementById('extraInput').value.trim();
             
-            let message = `${currentEmotionMessage} Şiddeti: ${selectedIntensity}/5 (${intensityLabels[selectedIntensity]}).`;
-            
-            if (extraText) {
-                message += ` Eklemek istediğim: ${extraText}`;
+            // Language-aware message template
+            let message;
+            if (BOT.lang === 'en') {
+                message = `${currentEmotionMessage} Intensity: ${selectedIntensity}/5 (${intensityLabels[selectedIntensity]}).`;
+                if (extraText) {
+                    message += ` Additional note: ${extraText}`;
+                }
+            } else {
+                message = `${currentEmotionMessage} Şiddeti: ${selectedIntensity}/5 (${intensityLabels[selectedIntensity]}).`;
+                if (extraText) {
+                    message += ` Eklemek istediğim: ${extraText}`;
+                }
             }
             
             closeEmotionModal();
@@ -2304,10 +2316,11 @@
                 const data = await response.json();
                 
                 if (data.error) {
+                    const defaultError = BOT.lang === 'en' ? 'An error occurred.' : 'Bir hata oluştu.';
                     document.getElementById('summaryContent').innerHTML = `
                         <div class="summary-error">
                             <strong>⚠️ ${escapeHtml(data.error)}</strong><br>
-                            ${escapeHtml(data.details || 'Bir hata oluştu.')}
+                            ${escapeHtml(data.details || defaultError)}
                         </div>
                     `;
                 } else {
@@ -2682,11 +2695,13 @@
             const div = document.createElement('div');
             div.className = 'message assistant error';
             
+            const defaultError = BOT.lang === 'en' ? 'An error occurred.' : 'Bir hata oluştu.';
+            
             div.innerHTML = `
                 <div class="message-avatar">⚠️</div>
                 <div class="message-bubble">
                     <div class="error-header">⚠️ ${escapeHtml(data.error)}</div>
-                    <div class="error-details">${escapeHtml(data.details || 'Bir hata oluştu.')}</div>
+                    <div class="error-details">${escapeHtml(data.details || defaultError)}</div>
                 </div>
             `;
             
