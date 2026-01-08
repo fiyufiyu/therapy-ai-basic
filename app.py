@@ -46,7 +46,7 @@ CHATBOTS = {
         'icon': '🧠',
         'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_6957e6ae66088195af2b5053af22c7ae0f5f0db59da0747b',
-        'prompt_version': '25',
+        'prompt_version': '27',
         'accent_color': '#10a37f',  # Green
         'welcome_title': 'Merhaba Meliksah! 👋',
         'welcome_text': 'Şu an baskın olan hangisi?',
@@ -193,7 +193,7 @@ CHATBOTS = {
         'icon': '🧠',
         'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_69580dccde088194aab560e77f08932c0e3a18c90eedd3b9',
-        'prompt_version': '11',
+        'prompt_version': '12',
         'accent_color': '#ec4899',  # Pink
         'welcome_title': 'Merhaba Melike! 👋',
         'welcome_text': 'Şu an baskın olan hangisi?',
@@ -686,7 +686,7 @@ CHATBOTS = {
         'icon': '🧠',
         'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_695ec5ddb4448193a6603ec7d600a3f30ec7368b8a1f92ef',
-        'prompt_version': '3',
+        'prompt_version': '4',
         'accent_color': '#0ea5e9',  # Sky Blue
         'welcome_title': 'Merhaba Sönmez! 👋',
         'welcome_text': 'Şu an baskın olan hangisi?',
