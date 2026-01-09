@@ -224,7 +224,7 @@ CHATBOTS = {
         'icon': '🧠',
         'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_695958416b2081978b087eb082a52f6e031bfc22cd5d10b0',
-        'prompt_version': '5',
+        'prompt_version': '6',
         'accent_color': '#f97316',  # Orange
         'welcome_title': 'Merhaba Eda! 👋',
         'welcome_text': 'Şu an baskın olan hangisi?',
@@ -686,7 +686,7 @@ CHATBOTS = {
         'icon': '🧠',
         'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_695ec5ddb4448193a6603ec7d600a3f30ec7368b8a1f92ef',
-        'prompt_version': '4',
+        'prompt_version': '5',
         'accent_color': '#0ea5e9',  # Sky Blue
         'welcome_title': 'Merhaba Sönmez! 👋',
         'welcome_text': 'Şu an baskın olan hangisi?',
