@@ -193,7 +193,7 @@ CHATBOTS = {
         'icon': '🧠',
         'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_69580dccde088194aab560e77f08932c0e3a18c90eedd3b9',
-        'prompt_version': '12',
+        'prompt_version': '14',
         'accent_color': '#ec4899',  # Pink
         'welcome_title': 'Merhaba Melike! 👋',
         'welcome_text': 'Şu an baskın olan hangisi?',
