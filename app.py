@@ -120,7 +120,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_modal_subtitle': 'Symbiont Yapay zekasını kullanmanız için size hatırlatma mailleri ve mesajları yollamamız için bu bilgileri istiyoruz. Eğer hatırlatmalar ve 1 dakikada okunabilecek karakter ve psikoloji analizleri istemiyorsanız "Geç" butonuna basıp chat\'e başlayabilirsiniz.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -198,7 +198,7 @@ CHATBOTS = {
         'level_up_congrats': 'Tebrikler!',
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_modal_subtitle': 'Symbiont Yapay zekasını kullanmanız için size hatırlatma mailleri ve mesajları yollamamız için bu bilgileri istiyoruz. Eğer hatırlatmalar ve 1 dakikada okunabilecek karakter ve psikoloji analizleri istemiyorsanız "Geç" butonuna basıp chat\'e başlayabilirsiniz.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -241,7 +241,7 @@ CHATBOTS = {
         'lang': 'tr',
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_modal_subtitle': 'Symbiont Yapay zekasını kullanmanız için size hatırlatma mailleri ve mesajları yollamamız için bu bilgileri istiyoruz. Eğer hatırlatmalar ve 1 dakikada okunabilecek karakter ve psikoloji analizleri istemiyorsanız "Geç" butonuna basıp chat\'e başlayabilirsiniz.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -284,7 +284,7 @@ CHATBOTS = {
         'lang': 'tr',
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_modal_subtitle': 'Symbiont Yapay zekasını kullanmanız için size hatırlatma mailleri ve mesajları yollamamız için bu bilgileri istiyoruz. Eğer hatırlatmalar ve 1 dakikada okunabilecek karakter ve psikoloji analizleri istemiyorsanız "Geç" butonuna basıp chat\'e başlayabilirsiniz.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -327,7 +327,7 @@ CHATBOTS = {
         'lang': 'tr',
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_modal_subtitle': 'Symbiont Yapay zekasını kullanmanız için size hatırlatma mailleri ve mesajları yollamamız için bu bilgileri istiyoruz. Eğer hatırlatmalar ve 1 dakikada okunabilecek karakter ve psikoloji analizleri istemiyorsanız "Geç" butonuna basıp chat\'e başlayabilirsiniz.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -418,7 +418,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_modal_subtitle': 'Symbiont Yapay zekasını kullanmanız için size hatırlatma mailleri ve mesajları yollamamız için bu bilgileri istiyoruz. Eğer hatırlatmalar ve 1 dakikada okunabilecek karakter ve psikoloji analizleri istemiyorsanız "Geç" butonuna basıp chat\'e başlayabilirsiniz.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -509,7 +509,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_modal_subtitle': 'Symbiont Yapay zekasını kullanmanız için size hatırlatma mailleri ve mesajları yollamamız için bu bilgileri istiyoruz. Eğer hatırlatmalar ve 1 dakikada okunabilecek karakter ve psikoloji analizleri istemiyorsanız "Geç" butonuna basıp chat\'e başlayabilirsiniz.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -600,7 +600,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_modal_subtitle': 'Symbiont Yapay zekasını kullanmanız için size hatırlatma mailleri ve mesajları yollamamız için bu bilgileri istiyoruz. Eğer hatırlatmalar ve 1 dakikada okunabilecek karakter ve psikoloji analizleri istemiyorsanız "Geç" butonuna basıp chat\'e başlayabilirsiniz.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -851,7 +851,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_modal_subtitle': 'Symbiont Yapay zekasını kullanmanız için size hatırlatma mailleri ve mesajları yollamamız için bu bilgileri istiyoruz. Eğer hatırlatmalar ve 1 dakikada okunabilecek karakter ve psikoloji analizleri istemiyorsanız "Geç" butonuna basıp chat\'e başlayabilirsiniz.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -942,7 +942,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_modal_subtitle': 'Symbiont Yapay zekasını kullanmanız için size hatırlatma mailleri ve mesajları yollamamız için bu bilgileri istiyoruz. Eğer hatırlatmalar ve 1 dakikada okunabilecek karakter ve psikoloji analizleri istemiyorsanız "Geç" butonuna basıp chat\'e başlayabilirsiniz.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
