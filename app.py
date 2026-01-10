@@ -120,7 +120,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': '**Size sunacaklarımız:**\n\n✓ Düzenli hatırlatma mailleri ve mesajları\n✓ 1 dakikalık karakter & psikoloji analizleri\n\nİstemiyorsanız **"Geç"** deyin, direkt chat\'e başlayın.',
+        'contact_modal_subtitle': 'Size sunacaklarımız: ✓ Düzenli hatırlatma mailleri ve mesajları ✓ 1 dakikalık karakter & psikoloji analizleri. İstemiyorsanız "Geç" deyin, direkt chate başlayın.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -198,7 +198,7 @@ CHATBOTS = {
         'level_up_congrats': 'Tebrikler!',
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': '**Size sunacaklarımız:**\n\n✓ Düzenli hatırlatma mailleri ve mesajları\n✓ 1 dakikalık karakter & psikoloji analizleri\n\nİstemiyorsanız **"Geç"** deyin, direkt chat\'e başlayın.',
+        'contact_modal_subtitle': 'Size sunacaklarımız: ✓ Düzenli hatırlatma mailleri ve mesajları ✓ 1 dakikalık karakter & psikoloji analizleri. İstemiyorsanız "Geç" deyin, direkt chate başlayın.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -241,7 +241,7 @@ CHATBOTS = {
         'lang': 'tr',
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': '**Size sunacaklarımız:**\n\n✓ Düzenli hatırlatma mailleri ve mesajları\n✓ 1 dakikalık karakter & psikoloji analizleri\n\nİstemiyorsanız **"Geç"** deyin, direkt chat\'e başlayın.',
+        'contact_modal_subtitle': 'Size sunacaklarımız: ✓ Düzenli hatırlatma mailleri ve mesajları ✓ 1 dakikalık karakter & psikoloji analizleri. İstemiyorsanız "Geç" deyin, direkt chate başlayın.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -284,7 +284,7 @@ CHATBOTS = {
         'lang': 'tr',
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': '**Size sunacaklarımız:**\n\n✓ Düzenli hatırlatma mailleri ve mesajları\n✓ 1 dakikalık karakter & psikoloji analizleri\n\nİstemiyorsanız **"Geç"** deyin, direkt chat\'e başlayın.',
+        'contact_modal_subtitle': 'Size sunacaklarımız: ✓ Düzenli hatırlatma mailleri ve mesajları ✓ 1 dakikalık karakter & psikoloji analizleri. İstemiyorsanız "Geç" deyin, direkt chate başlayın.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -327,7 +327,7 @@ CHATBOTS = {
         'lang': 'tr',
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': '**Size sunacaklarımız:**\n\n✓ Düzenli hatırlatma mailleri ve mesajları\n✓ 1 dakikalık karakter & psikoloji analizleri\n\nİstemiyorsanız **"Geç"** deyin, direkt chat\'e başlayın.',
+        'contact_modal_subtitle': 'Size sunacaklarımız: ✓ Düzenli hatırlatma mailleri ve mesajları ✓ 1 dakikalık karakter & psikoloji analizleri. İstemiyorsanız "Geç" deyin, direkt chate başlayın.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -418,7 +418,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': '**Size sunacaklarımız:**\n\n✓ Düzenli hatırlatma mailleri ve mesajları\n✓ 1 dakikalık karakter & psikoloji analizleri\n\nİstemiyorsanız **"Geç"** deyin, direkt chat\'e başlayın.',
+        'contact_modal_subtitle': 'Size sunacaklarımız: ✓ Düzenli hatırlatma mailleri ve mesajları ✓ 1 dakikalık karakter & psikoloji analizleri. İstemiyorsanız "Geç" deyin, direkt chate başlayın.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -509,7 +509,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': '**Size sunacaklarımız:**\n\n✓ Düzenli hatırlatma mailleri ve mesajları\n✓ 1 dakikalık karakter & psikoloji analizleri\n\nİstemiyorsanız **"Geç"** deyin, direkt chat\'e başlayın.',
+        'contact_modal_subtitle': 'Size sunacaklarımız: ✓ Düzenli hatırlatma mailleri ve mesajları ✓ 1 dakikalık karakter & psikoloji analizleri. İstemiyorsanız "Geç" deyin, direkt chate başlayın.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -600,7 +600,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': '**Size sunacaklarımız:**\n\n✓ Düzenli hatırlatma mailleri ve mesajları\n✓ 1 dakikalık karakter & psikoloji analizleri\n\nİstemiyorsanız **"Geç"** deyin, direkt chat\'e başlayın.',
+        'contact_modal_subtitle': 'Size sunacaklarımız: ✓ Düzenli hatırlatma mailleri ve mesajları ✓ 1 dakikalık karakter & psikoloji analizleri. İstemiyorsanız "Geç" deyin, direkt chate başlayın.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -851,7 +851,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': '**Size sunacaklarımız:**\n\n✓ Düzenli hatırlatma mailleri ve mesajları\n✓ 1 dakikalık karakter & psikoloji analizleri\n\nİstemiyorsanız **"Geç"** deyin, direkt chat\'e başlayın.',
+        'contact_modal_subtitle': 'Size sunacaklarımız: ✓ Düzenli hatırlatma mailleri ve mesajları ✓ 1 dakikalık karakter & psikoloji analizleri. İstemiyorsanız "Geç" deyin, direkt chate başlayın.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
@@ -942,7 +942,7 @@ CHATBOTS = {
         ],
         # Contact preferences modal
         'contact_modal_title': 'Seninle İletişimde Kalalım',
-        'contact_modal_subtitle': '**Size sunacaklarımız:**\n\n✓ Düzenli hatırlatma mailleri ve mesajları\n✓ 1 dakikalık karakter & psikoloji analizleri\n\nİstemiyorsanız **"Geç"** deyin, direkt chat\'e başlayın.',
+        'contact_modal_subtitle': 'Size sunacaklarımız: ✓ Düzenli hatırlatma mailleri ve mesajları ✓ 1 dakikalık karakter & psikoloji analizleri. İstemiyorsanız "Geç" deyin, direkt chate başlayın.',
         'contact_email_label': 'E-posta Adresi',
         'contact_email_placeholder': 'ornek@email.com',
         'contact_phone_label': 'Telefon Numarası',
