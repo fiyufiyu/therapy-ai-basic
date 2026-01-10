@@ -1393,6 +1393,19 @@ def save_contact_preferences(bot_id):
         print(f"Error saving contact preferences: {e}")
         return jsonify({'error': 'Failed to save preferences'}), 500
 
+@app.route('/api/contact-preferences/<bot_id>/get', methods=['GET'])
+def get_user_contact_preferences(bot_id):
+    """Get user's own contact preferences."""
+    try:
+        prefs = db.get_contact_preferences(bot_id)
+        if prefs:
+            return jsonify({'preferences': prefs})
+        else:
+            return jsonify({'preferences': None}), 404
+    except Exception as e:
+        print(f"Error getting contact preferences: {e}")
+        return jsonify({'error': 'Failed to get preferences'}), 500
+
 @app.route('/api/contact-preferences', methods=['GET'])
 def get_all_contact_preferences():
     """Get all contact preferences (admin endpoint - protected)."""

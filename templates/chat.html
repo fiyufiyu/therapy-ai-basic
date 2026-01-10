@@ -1803,6 +1803,12 @@
                 </div>
             </div>
             <div class="header-actions">
+                <button class="icon-btn" onclick="openContactModalManually()" title="İletişim Tercihleri">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </button>
                 <button class="icon-btn" onclick="startNewChat()" title="Yeni Sohbet">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 5v14M5 12h14"/>
@@ -3033,6 +3039,31 @@
                 setTimeout(() => {
                     document.getElementById('contactModalOverlay').classList.add('show');
                 }, 1000);
+            }
+        }
+
+        function openContactModalManually() {
+            // Allow users to update their preferences anytime
+            loadCurrentPreferences();
+            document.getElementById('contactModalOverlay').classList.add('show');
+        }
+
+        async function loadCurrentPreferences() {
+            // Try to load existing preferences from server
+            try {
+                const response = await fetch(`/api/contact-preferences/${BOT.id}/get`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.preferences) {
+                        // Fill form with existing data
+                        document.getElementById('contactEmail').value = data.preferences.email || '';
+                        document.getElementById('contactPhone').value = data.preferences.phone || '';
+                        document.getElementById('frequencySlider').value = data.preferences.frequency || 4;
+                        updateFrequencyDisplay();
+                    }
+                }
+            } catch (e) {
+                console.log('No existing preferences found');
             }
         }
 
