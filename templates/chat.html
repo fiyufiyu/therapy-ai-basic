@@ -2068,7 +2068,7 @@
             <div class="contact-modal-header">
                 <div class="contact-modal-icon">📬</div>
                 <div class="contact-modal-title">{{ bot.contact_modal_title | default("Seninle İletişimde Kalalım") }}</div>
-                <div class="contact-modal-subtitle">{{ bot.contact_modal_subtitle | default("İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin") }}</div>
+                <div class="contact-modal-subtitle">{{ bot.contact_modal_subtitle | default("İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin") | safe }}</div>
             </div>
 
             <div class="contact-modal-section">
