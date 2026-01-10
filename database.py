@@ -107,6 +107,19 @@ def init_db():
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             ''')
+            
+            # Contact preferences table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS contact_preferences (
+                    bot_id TEXT PRIMARY KEY,
+                    bot_name TEXT,
+                    email TEXT,
+                    phone TEXT,
+                    frequency INTEGER,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
         else:
             cursor = conn.cursor()
             
@@ -158,6 +171,31 @@ def init_db():
                     bot_id TEXT PRIMARY KEY,
                     xp INTEGER DEFAULT 0,
                     level INTEGER DEFAULT 1,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
+            
+            # Contact preferences table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS contact_preferences (
+                    bot_id TEXT PRIMARY KEY,
+                    bot_name TEXT,
+                    email TEXT,
+                    phone TEXT,
+                    frequency INTEGER,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
+            
+            # Contact preferences table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS contact_preferences (
+                    bot_id TEXT PRIMARY KEY,
+                    email TEXT,
+                    phone TEXT,
+                    frequency INTEGER,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             ''')
@@ -478,6 +516,68 @@ def add_xp(bot_id: str, xp_amount: int) -> dict:
             break
     
     return update_user_xp(bot_id, new_xp, new_level)
+
+
+# Contact preferences operations
+def save_contact_preferences(bot_id: str, bot_name: str, email: str, phone: str, frequency: int) -> dict:
+    """Save or update contact preferences for a user/bot."""
+    with get_db() as conn:
+        now = datetime.now().isoformat()
+        
+        if USE_POSTGRES:
+            cursor = conn.cursor(cursor_factory=RealDictCursor)
+            
+            # Upsert - insert or update
+            cursor.execute('''
+                INSERT INTO contact_preferences (bot_id, bot_name, email, phone, frequency, created_at, updated_at) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (bot_id) 
+                DO UPDATE SET bot_name = %s, email = %s, phone = %s, frequency = %s, updated_at = %s
+            ''', (bot_id, bot_name, email, phone, frequency, now, now, bot_name, email, phone, frequency, now))
+        else:
+            cursor = conn.cursor()
+            
+            # Check if exists
+            cursor.execute('SELECT bot_id FROM contact_preferences WHERE bot_id = ?', (bot_id,))
+            if cursor.fetchone():
+                cursor.execute(
+                    'UPDATE contact_preferences SET bot_name = ?, email = ?, phone = ?, frequency = ?, updated_at = ? WHERE bot_id = ?',
+                    (bot_name, email, phone, frequency, now, bot_id)
+                )
+            else:
+                cursor.execute(
+                    'INSERT INTO contact_preferences (bot_id, bot_name, email, phone, frequency, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                    (bot_id, bot_name, email, phone, frequency, now, now)
+                )
+        
+        return {'bot_id': bot_id, 'bot_name': bot_name, 'email': email, 'phone': phone, 'frequency': frequency}
+
+
+def get_contact_preferences(bot_id: str) -> Optional[dict]:
+    """Get contact preferences for a user/bot."""
+    with get_db() as conn:
+        if USE_POSTGRES:
+            cursor = conn.cursor(cursor_factory=RealDictCursor)
+            cursor.execute('SELECT * FROM contact_preferences WHERE bot_id = %s', (bot_id,))
+        else:
+            cursor = conn.cursor()
+            cursor.execute('SELECT * FROM contact_preferences WHERE bot_id = ?', (bot_id,))
+        
+        row = cursor.fetchone()
+        return dict(row) if row else None
+
+
+def get_all_contact_preferences() -> list:
+    """Get all contact preferences."""
+    with get_db() as conn:
+        if USE_POSTGRES:
+            cursor = conn.cursor(cursor_factory=RealDictCursor)
+            cursor.execute('SELECT * FROM contact_preferences ORDER BY created_at DESC')
+        else:
+            cursor = conn.cursor()
+            cursor.execute('SELECT * FROM contact_preferences ORDER BY created_at DESC')
+        
+        return [dict(row) for row in cursor.fetchall()]
 
 
 # Initialize database on module import

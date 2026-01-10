@@ -117,7 +117,18 @@ CHATBOTS = {
             "Bu seviyeye ulaşan çok az kişi var. Tebrikler!",
             "Seninle olan yolculuğumuz muhteşem!",
             "Maksimum bağlantı! Artık seni çok iyi tanıyorum."
-        ]
+        ],
+        # Contact preferences modal
+        'contact_modal_title': 'Seninle İletişimde Kalalım',
+        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_email_label': 'E-posta Adresi',
+        'contact_email_placeholder': 'ornek@email.com',
+        'contact_phone_label': 'Telefon Numarası',
+        'contact_phone_placeholder': '+90 5XX XXX XX XX',
+        'contact_frequency_label': 'Haftada kaç kez size ulaşabiliriz?',
+        'contact_frequency_subtitle': '(1 = Hiç, 7 = Her gün)',
+        'contact_skip': 'Geç',
+        'contact_submit': 'Gönder'
     },
     'cihan': {
         'id': 'cihan',
@@ -184,7 +195,18 @@ CHATBOTS = {
         'medium_msg': 'Orta Mesaj',
         'long_msg': 'Uzun Mesaj',
         'xp_thanks': 'Teşekkürler, seni daha iyi tanıyorum!',
-        'level_up_congrats': 'Tebrikler!'
+        'level_up_congrats': 'Tebrikler!',
+        # Contact preferences modal
+        'contact_modal_title': 'Seninle İletişimde Kalalım',
+        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_email_label': 'E-posta Adresi',
+        'contact_email_placeholder': 'ornek@email.com',
+        'contact_phone_label': 'Telefon Numarası',
+        'contact_phone_placeholder': '+90 5XX XXX XX XX',
+        'contact_frequency_label': 'Haftada kaç kez size ulaşabiliriz?',
+        'contact_frequency_subtitle': '(1 = Hiç, 7 = Her gün)',
+        'contact_skip': 'Geç',
+        'contact_submit': 'Gönder'
     },
     'melike': {
         'id': 'melike',
@@ -193,7 +215,7 @@ CHATBOTS = {
         'icon': '🧠',
         'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_69580dccde088194aab560e77f08932c0e3a18c90eedd3b9',
-        'prompt_version': '14',
+        'prompt_version': '15',
         'accent_color': '#ec4899',  # Pink
         'welcome_title': 'Merhaba Melike! 👋',
         'welcome_text': 'Şu an baskın olan hangisi?',
@@ -215,7 +237,19 @@ CHATBOTS = {
         'yesterday': 'Dün',
         'previous': 'Önceki',
         'no_chats': 'Henüz sohbet yok',
-        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
+        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter',
+        'lang': 'tr',
+        # Contact preferences modal
+        'contact_modal_title': 'Seninle İletişimde Kalalım',
+        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_email_label': 'E-posta Adresi',
+        'contact_email_placeholder': 'ornek@email.com',
+        'contact_phone_label': 'Telefon Numarası',
+        'contact_phone_placeholder': '+90 5XX XXX XX XX',
+        'contact_frequency_label': 'Haftada kaç kez size ulaşabiliriz?',
+        'contact_frequency_subtitle': '(1 = Hiç, 7 = Her gün)',
+        'contact_skip': 'Geç',
+        'contact_submit': 'Gönder'
     },
     'eda': {
         'id': 'eda',
@@ -246,7 +280,19 @@ CHATBOTS = {
         'yesterday': 'Dün',
         'previous': 'Önceki',
         'no_chats': 'Henüz sohbet yok',
-        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
+        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter',
+        'lang': 'tr',
+        # Contact preferences modal
+        'contact_modal_title': 'Seninle İletişimde Kalalım',
+        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_email_label': 'E-posta Adresi',
+        'contact_email_placeholder': 'ornek@email.com',
+        'contact_phone_label': 'Telefon Numarası',
+        'contact_phone_placeholder': '+90 5XX XXX XX XX',
+        'contact_frequency_label': 'Haftada kaç kez size ulaşabiliriz?',
+        'contact_frequency_subtitle': '(1 = Hiç, 7 = Her gün)',
+        'contact_skip': 'Geç',
+        'contact_submit': 'Gönder'
     },
     'can': {
         'id': 'can',
@@ -277,7 +323,19 @@ CHATBOTS = {
         'yesterday': 'Dün',
         'previous': 'Önceki',
         'no_chats': 'Henüz sohbet yok',
-        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter'
+        'input_hint': 'Göndermek için Enter, yeni satır için Shift+Enter',
+        'lang': 'tr',
+        # Contact preferences modal
+        'contact_modal_title': 'Seninle İletişimde Kalalım',
+        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_email_label': 'E-posta Adresi',
+        'contact_email_placeholder': 'ornek@email.com',
+        'contact_phone_label': 'Telefon Numarası',
+        'contact_phone_placeholder': '+90 5XX XXX XX XX',
+        'contact_frequency_label': 'Haftada kaç kez size ulaşabiliriz?',
+        'contact_frequency_subtitle': '(1 = Hiç, 7 = Her gün)',
+        'contact_skip': 'Geç',
+        'contact_submit': 'Gönder'
     },
     'esma': {
         'id': 'esma',
@@ -357,7 +415,18 @@ CHATBOTS = {
             "Bu seviyeye ulaşan çok az kişi var. Tebrikler!",
             "Seninle olan yolculuğumuz muhteşem!",
             "Maksimum bağlantı! Artık seni çok iyi tanıyorum."
-        ]
+        ],
+        # Contact preferences modal
+        'contact_modal_title': 'Seninle İletişimde Kalalım',
+        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_email_label': 'E-posta Adresi',
+        'contact_email_placeholder': 'ornek@email.com',
+        'contact_phone_label': 'Telefon Numarası',
+        'contact_phone_placeholder': '+90 5XX XXX XX XX',
+        'contact_frequency_label': 'Haftada kaç kez size ulaşabiliriz?',
+        'contact_frequency_subtitle': '(1 = Hiç, 7 = Her gün)',
+        'contact_skip': 'Geç',
+        'contact_submit': 'Gönder'
     },
     'busra': {
         'id': 'busra',
@@ -437,7 +506,18 @@ CHATBOTS = {
             "Bu seviyeye ulaşan çok az kişi var. Tebrikler!",
             "Seninle olan yolculuğumuz muhteşem!",
             "Maksimum bağlantı! Artık seni çok iyi tanıyorum."
-        ]
+        ],
+        # Contact preferences modal
+        'contact_modal_title': 'Seninle İletişimde Kalalım',
+        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_email_label': 'E-posta Adresi',
+        'contact_email_placeholder': 'ornek@email.com',
+        'contact_phone_label': 'Telefon Numarası',
+        'contact_phone_placeholder': '+90 5XX XXX XX XX',
+        'contact_frequency_label': 'Haftada kaç kez size ulaşabiliriz?',
+        'contact_frequency_subtitle': '(1 = Hiç, 7 = Her gün)',
+        'contact_skip': 'Geç',
+        'contact_submit': 'Gönder'
     },
     'ayse': {
         'id': 'ayse',
@@ -517,7 +597,18 @@ CHATBOTS = {
             "Bu seviyeye ulaşan çok az kişi var. Tebrikler!",
             "Seninle olan yolculuğumuz muhteşem!",
             "Maksimum bağlantı! Artık seni çok iyi tanıyorum."
-        ]
+        ],
+        # Contact preferences modal
+        'contact_modal_title': 'Seninle İletişimde Kalalım',
+        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_email_label': 'E-posta Adresi',
+        'contact_email_placeholder': 'ornek@email.com',
+        'contact_phone_label': 'Telefon Numarası',
+        'contact_phone_placeholder': '+90 5XX XXX XX XX',
+        'contact_frequency_label': 'Haftada kaç kez size ulaşabiliriz?',
+        'contact_frequency_subtitle': '(1 = Hiç, 7 = Her gün)',
+        'contact_skip': 'Geç',
+        'contact_submit': 'Gönder'
     },
     'warriorsofcompassion': {
         'id': 'warriorsofcompassion',
@@ -757,7 +848,18 @@ CHATBOTS = {
             "Bu seviyeye ulaşan çok az kişi var. Tebrikler!",
             "Seninle olan yolculuğumuz muhteşem!",
             "Maksimum bağlantı! Artık seni çok iyi tanıyorum."
-        ]
+        ],
+        # Contact preferences modal
+        'contact_modal_title': 'Seninle İletişimde Kalalım',
+        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_email_label': 'E-posta Adresi',
+        'contact_email_placeholder': 'ornek@email.com',
+        'contact_phone_label': 'Telefon Numarası',
+        'contact_phone_placeholder': '+90 5XX XXX XX XX',
+        'contact_frequency_label': 'Haftada kaç kez size ulaşabiliriz?',
+        'contact_frequency_subtitle': '(1 = Hiç, 7 = Her gün)',
+        'contact_skip': 'Geç',
+        'contact_submit': 'Gönder'
     },
     'neslihan': {
         'id': 'neslihan',
@@ -766,7 +868,7 @@ CHATBOTS = {
         'icon': '🧠',
         'logo': '/static/logo-symbiont.png',
         'prompt_id': 'pmpt_69613b28ae40819093f0bdf7f61d0205051b14679818672e',
-        'prompt_version': '2',
+        'prompt_version': '3',
         'accent_color': '#d946ef',  # Fuchsia
         'welcome_title': 'Merhaba Neslihan! 👋',
         'welcome_text': 'Şu an baskın olan hangisi?',
@@ -837,7 +939,18 @@ CHATBOTS = {
             "Bu seviyeye ulaşan çok az kişi var. Tebrikler!",
             "Seninle olan yolculuğumuz muhteşem!",
             "Maksimum bağlantı! Artık seni çok iyi tanıyorum."
-        ]
+        ],
+        # Contact preferences modal
+        'contact_modal_title': 'Seninle İletişimde Kalalım',
+        'contact_modal_subtitle': 'İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin',
+        'contact_email_label': 'E-posta Adresi',
+        'contact_email_placeholder': 'ornek@email.com',
+        'contact_phone_label': 'Telefon Numarası',
+        'contact_phone_placeholder': '+90 5XX XXX XX XX',
+        'contact_frequency_label': 'Haftada kaç kez size ulaşabiliriz?',
+        'contact_frequency_subtitle': '(1 = Hiç, 7 = Her gün)',
+        'contact_skip': 'Geç',
+        'contact_submit': 'Gönder'
     }
 }
 
@@ -1253,6 +1366,60 @@ def add_xp_endpoint(bot_id):
     
     xp_data = db.add_xp(bot_id, xp_amount)
     return jsonify(xp_data)
+
+# ============== Contact Preferences API ==============
+
+@app.route('/api/contact-preferences/<bot_id>', methods=['POST'])
+def save_contact_preferences(bot_id):
+    """Save user contact preferences."""
+    data = request.json
+    email = data.get('email', '').strip()
+    phone = data.get('phone', '').strip()
+    frequency = data.get('frequency', 0)
+    
+    # Validate frequency
+    if not isinstance(frequency, int) or frequency < 1 or frequency > 7:
+        return jsonify({'error': 'Invalid frequency value'}), 400
+    
+    # Get bot name from CHATBOTS config
+    bot = CHATBOTS.get(bot_id)
+    bot_name = bot['name'] if bot else bot_id
+    
+    # Save to database
+    try:
+        db.save_contact_preferences(bot_id, bot_name, email, phone, frequency)
+        return jsonify({'status': 'success'})
+    except Exception as e:
+        print(f"Error saving contact preferences: {e}")
+        return jsonify({'error': 'Failed to save preferences'}), 500
+
+@app.route('/api/contact-preferences', methods=['GET'])
+def get_all_contact_preferences():
+    """Get all contact preferences (admin endpoint - protected)."""
+    # Admin token authentication
+    admin_token = os.getenv('ADMIN_TOKEN')
+    
+    # Check if admin token is configured
+    if not admin_token:
+        return jsonify({'error': 'Admin access not configured'}), 500
+    
+    # Check authorization header
+    auth_header = request.headers.get('Authorization')
+    if not auth_header or not auth_header.startswith('Bearer '):
+        return jsonify({'error': 'Unauthorized - Token required'}), 401
+    
+    # Extract and validate token
+    provided_token = auth_header.replace('Bearer ', '')
+    if provided_token != admin_token:
+        return jsonify({'error': 'Unauthorized - Invalid token'}), 401
+    
+    # If authenticated, return preferences
+    try:
+        prefs = db.get_all_contact_preferences()
+        return jsonify({'preferences': prefs, 'count': len(prefs)})
+    except Exception as e:
+        print(f"Error getting contact preferences: {e}")
+        return jsonify({'error': 'Failed to get preferences'}), 500
 
 if __name__ == '__main__':
     import os

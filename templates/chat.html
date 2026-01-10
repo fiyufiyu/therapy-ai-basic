@@ -1553,6 +1553,227 @@
         .summary-modal-btn:hover {
             filter: brightness(1.1);
         }
+
+        /* Contact Preferences Modal */
+        .contact-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .contact-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .contact-modal {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .contact-modal-overlay.show .contact-modal {
+            transform: scale(1);
+        }
+
+        .contact-modal-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .contact-modal-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .contact-modal-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .contact-modal-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .contact-modal-section {
+            margin-bottom: 20px;
+        }
+
+        .contact-modal-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .contact-modal-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+
+        .contact-modal-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        .contact-modal-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .frequency-label-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .frequency-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .frequency-slider-container {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .frequency-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(to right, var(--accent-soft), var(--accent));
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .frequency-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.2s ease;
+        }
+
+        .frequency-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .frequency-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: none;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.2s ease;
+        }
+
+        .frequency-slider::-moz-range-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .frequency-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+
+        .frequency-label-item {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+            flex: 1;
+        }
+
+        .frequency-value-display {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .contact-modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .contact-modal-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: var(--radius-full);
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .contact-modal-btn-skip {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .contact-modal-btn-skip:hover {
+            background: var(--border);
+        }
+
+        .contact-modal-btn-submit {
+            background: var(--accent);
+            border: none;
+            color: white;
+        }
+
+        .contact-modal-btn-submit:hover {
+            filter: brightness(1.1);
+        }
+
+        @media (max-width: 480px) {
+            .contact-modal {
+                padding: 24px;
+            }
+
+            .contact-modal-title {
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1835,6 +2056,52 @@
         </div>
     </div>
 
+    <!-- Contact Preferences Modal -->
+    <div class="contact-modal-overlay" id="contactModalOverlay">
+        <div class="contact-modal" onclick="event.stopPropagation()">
+            <div class="contact-modal-header">
+                <div class="contact-modal-icon">📬</div>
+                <div class="contact-modal-title">{{ bot.contact_modal_title | default("Seninle İletişimde Kalalım") }}</div>
+                <div class="contact-modal-subtitle">{{ bot.contact_modal_subtitle | default("İsteğe bağlı olarak bizimle iletişim bilgilerini paylaşabilirsin") }}</div>
+            </div>
+
+            <div class="contact-modal-section">
+                <label class="contact-modal-label">{{ bot.contact_email_label | default("E-posta Adresi") }} <span style="color: var(--text-muted); font-weight: 400;">(Opsiyonel)</span></label>
+                <input type="email" class="contact-modal-input" id="contactEmail" placeholder="{{ bot.contact_email_placeholder | default('ornek@email.com') }}">
+            </div>
+
+            <div class="contact-modal-section">
+                <label class="contact-modal-label">{{ bot.contact_phone_label | default("Telefon Numarası") }} <span style="color: var(--text-muted); font-weight: 400;">(Opsiyonel)</span></label>
+                <input type="tel" class="contact-modal-input" id="contactPhone" placeholder="{{ bot.contact_phone_placeholder | default('+90 5XX XXX XX XX') }}">
+            </div>
+
+            <div class="contact-modal-section">
+                <div class="frequency-label-container">
+                    <label class="contact-modal-label">{{ bot.contact_frequency_label | default("Haftada kaç kez size ulaşabiliriz?") }}</label>
+                </div>
+                <div class="frequency-subtitle">{{ bot.contact_frequency_subtitle | default("(1 = Hiç, 7 = Her gün)") }}</div>
+                <div class="frequency-slider-container">
+                    <div class="frequency-value-display" id="frequencyValue">4</div>
+                    <input type="range" class="frequency-slider" id="frequencySlider" min="1" max="7" value="4" oninput="updateFrequencyDisplay()">
+                    <div class="frequency-labels">
+                        <span class="frequency-label-item">1</span>
+                        <span class="frequency-label-item">2</span>
+                        <span class="frequency-label-item">3</span>
+                        <span class="frequency-label-item">4</span>
+                        <span class="frequency-label-item">5</span>
+                        <span class="frequency-label-item">6</span>
+                        <span class="frequency-label-item">7</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-modal-actions">
+                <button class="contact-modal-btn contact-modal-btn-skip" onclick="skipContactModal()">{{ bot.contact_skip | default("Geç") }}</button>
+                <button class="contact-modal-btn contact-modal-btn-submit" onclick="submitContactPreferences()">{{ bot.contact_submit | default("Gönder") }}</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const BOT = {
             id: '{{ bot.id }}',
@@ -1885,7 +2152,15 @@
             mediumMsg: '{{ bot.medium_msg | default("Orta Mesaj") }}',
             longMsg: '{{ bot.long_msg | default("Uzun Mesaj") }}',
             xpThanks: '{{ bot.xp_thanks | default("Teşekkürler, seni daha iyi tanıyorum!") }}',
-            levelUpCongrats: '{{ bot.level_up_congrats | default("Tebrikler!") }}'
+            levelUpCongrats: '{{ bot.level_up_congrats | default("Tebrikler!") }}',
+            // Contact modal texts
+            contactModalTitle: '{{ bot.contact_modal_title | default("") }}',
+            contactModalSubtitle: '{{ bot.contact_modal_subtitle | default("") }}',
+            contactEmailLabel: '{{ bot.contact_email_label | default("") }}',
+            contactPhoneLabel: '{{ bot.contact_phone_label | default("") }}',
+            contactFrequencyLabel: '{{ bot.contact_frequency_label | default("") }}',
+            contactSkip: '{{ bot.contact_skip | default("") }}',
+            contactSubmit: '{{ bot.contact_submit | default("") }}'
         };
 
         let sessionId = BOT.id + '_' + Math.random().toString(36).substr(2, 9);
@@ -2743,10 +3018,88 @@
             return div.innerHTML.replace(/\n/g, '<br>');
         }
 
+        // ============== Contact Preferences Modal ==============
+        function checkAndShowContactModal() {
+            // Only show for bots with Turkish language and contact modal configured
+            if (BOT.lang !== 'tr' || !BOT.contactModalTitle) {
+                return;
+            }
+
+            const storageKey = `contact_preferences_shown_${BOT.id}`;
+            const hasShown = localStorage.getItem(storageKey);
+
+            if (!hasShown) {
+                // Show modal after a short delay
+                setTimeout(() => {
+                    document.getElementById('contactModalOverlay').classList.add('show');
+                }, 1000);
+            }
+        }
+
+        function updateFrequencyDisplay() {
+            const slider = document.getElementById('frequencySlider');
+            const display = document.getElementById('frequencyValue');
+            if (slider && display) {
+                display.textContent = slider.value;
+            }
+        }
+
+        function skipContactModal() {
+            const storageKey = `contact_preferences_shown_${BOT.id}`;
+            localStorage.setItem(storageKey, 'true');
+            document.getElementById('contactModalOverlay').classList.remove('show');
+        }
+
+        async function submitContactPreferences() {
+            const email = document.getElementById('contactEmail').value.trim();
+            const phone = document.getElementById('contactPhone').value.trim();
+            const frequency = parseInt(document.getElementById('frequencySlider').value, 10);
+
+            console.log('Submitting contact preferences:', { email, phone, frequency });
+
+            try {
+                const response = await fetch(`/api/contact-preferences/${BOT.id}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        phone: phone,
+                        frequency: frequency
+                    })
+                });
+
+                const data = await response.json();
+                console.log('Response:', data);
+
+                if (response.ok && data.status === 'success') {
+                    // Mark as shown in localStorage
+                    const storageKey = `contact_preferences_shown_${BOT.id}`;
+                    localStorage.setItem(storageKey, 'true');
+                    
+                    // Close modal
+                    document.getElementById('contactModalOverlay').classList.remove('show');
+                    console.log('Contact preferences saved successfully');
+                } else {
+                    console.error('Failed to save:', data);
+                    // Still close the modal and mark as shown
+                    const storageKey = `contact_preferences_shown_${BOT.id}`;
+                    localStorage.setItem(storageKey, 'true');
+                    document.getElementById('contactModalOverlay').classList.remove('show');
+                }
+            } catch (e) {
+                console.error('Failed to save contact preferences:', e);
+                // Still close the modal and mark as shown
+                const storageKey = `contact_preferences_shown_${BOT.id}`;
+                localStorage.setItem(storageKey, 'true');
+                document.getElementById('contactModalOverlay').classList.remove('show');
+            }
+        }
+
         // Init
         document.addEventListener('DOMContentLoaded', () => {
             loadHistory();
             loadXP();  // Load saved XP
+            checkAndShowContactModal();  // Check if we should show contact modal
             if (window.innerWidth > 768) {
                 document.getElementById('userInput').focus();
             }
